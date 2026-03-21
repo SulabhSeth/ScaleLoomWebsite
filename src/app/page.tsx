@@ -1,65 +1,94 @@
-import Image from "next/image";
+import Hero from "./components/Hero";
+import ServicesPreview from "./components/ServicesPreview";
+import Milestones from "./components/Milestones";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="min-h-screen">
+      {/* <Navbar /> */}
+      <Hero />
+      
+      {/* SECTION 1 */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-10">
+          <h2 className="text-4xl font-bold text-brandBlue mb-6">
+            Our Vision
+          </h2>
+          <p className="text-brandGreyBlue max-w-3xl leading-relaxed">
+            We aim to bridge the gap between technology and business by creating
+            systems that are not only scalable but also aligned with your long-term
+            goals. Our approach focuses on clarity, efficiency, and growth.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* SECTION 2 */}
+      {/* <section className="py-24 bg-[#f8f9ff]">
+        <div className="max-w-7xl mx-auto px-10 grid grid-cols-3 gap-10">
+          
+          {[1, 2, 3].map((item) => (
+            <div
+              key={item}
+              className="p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition"
+            >
+              <h3 className="text-xl font-semibold text-brandBlue mb-3">
+                Service {item}
+              </h3>
+              <p className="text-brandGreyBlue text-sm leading-relaxed">
+                We design and develop scalable digital solutions tailored to your
+                business needs, ensuring long-term sustainability and growth.
+              </p>
+            </div>
+          ))}
+
         </div>
-      </main>
+      </section> */}
+
+      <ServicesPreview />
+
+      {/* SECTION 3 */}
+      <section className="py-24 bg-white">
+  <div className="max-w-7xl mx-auto px-10 grid grid-cols-2 gap-16 items-center">
+    
+    {/* LEFT */}
+    <div>
+      <h2 className="text-4xl font-bold text-brandBlue mb-6">
+        Why Choose Us
+      </h2>
+
+      <p className="text-brandGreyBlue leading-relaxed mb-4">
+        With 50+ years of combined team experience, we have successfully executed
+        150+ digital projects and 42 enterprise-grade integrations.
+      </p>
+
+      <p className="text-brandGreyBlue leading-relaxed">
+        Our approach ensures a 60% cost-to-value advantage while maintaining
+        scalable and structured systems.
+      </p>
     </div>
+
+    {/* RIGHT */}
+    <Milestones />
+
+  </div>
+</section>
+
+      {/* SECTION 4 */}
+      <section className="py-24 bg-[#f8f9ff]">
+        <div className="max-w-7xl mx-auto px-10 text-center">
+          <h2 className="text-4xl font-bold text-brandBlue mb-6">
+            Let’s Build Together
+          </h2>
+          <p className="text-brandGreyBlue max-w-2xl mx-auto mb-8">
+            Partner with us to transform your ideas into scalable digital
+            products that drive real business growth.
+          </p>
+          <button className="bg-brandBlue text-white px-8 py-3 rounded-full hover:opacity-90 transition">
+            Get Started
+          </button>
+        </div>
+      </section>
+
+    </main>
   );
 }
