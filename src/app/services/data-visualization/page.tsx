@@ -161,7 +161,7 @@ function CtaBanner() {
           className="inline-block px-10 py-4 rounded-full font-bold text-sm text-white"
           style={{ background: "#94b500", boxShadow: "0 8px 30px rgba(148,181,0,0.4)" }}
         >
-          Book a Free Strategy Call →
+          Contact Us →
         </Link>
       </div>
     </section>
@@ -301,13 +301,13 @@ export default function DataVisualizationPage() {
                 >
                   Start a Project
                 </Link>
-                <Link
+                {/* <Link
                   href="/services"
                   className="px-7 py-3 rounded-full font-semibold text-sm border-2"
                   style={{ borderColor: "#07187b", color: "#07187b" }}
                 >
                   All Services →
-                </Link>
+                </Link> */}
               </div>
             </div>
 

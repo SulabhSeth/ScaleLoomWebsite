@@ -25,7 +25,7 @@ function useInView(threshold = 0.15) {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SUB-COMPONENTS
+   SHARED UI COMPONENTS
 ═══════════════════════════════════════════════════════════ */
 function DeliverableItem({ text, sub, index }: { text: string; sub: string; index: number }) {
   const { ref, isVisible } = useInView(0.2);
@@ -143,18 +143,18 @@ function CtaBanner() {
         }}
       >
         <h2 className="text-5xl font-black text-white mb-6 leading-tight">
-          Have a Problem<br />
-          <span style={{ color: "#94b500" }}>No Tool Solves?</span>
+          Still Doing It<br />
+          <span style={{ color: "#94b500" }}>Manually?</span>
         </h2>
         <p className="text-base mb-10" style={{ color: "rgba(255,255,255,0.65)" }}>
-          Tell us what's broken, inefficient, or missing — we'll engineer exactly what you need.
+          Every hour your team spends on repetitive tasks is an hour not spent growing the business. Let's fix that.
         </p>
         <Link
           href="/contact"
           className="inline-block px-10 py-4 rounded-full font-bold text-sm text-white"
           style={{ background: "#94b500", boxShadow: "0 8px 30px rgba(148,181,0,0.4)" }}
         >
-          Book a Free Strategy Call →
+          Connect with Us →
         </Link>
       </div>
     </section>
@@ -162,45 +162,32 @@ function CtaBanner() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   HERO RIGHT — animated "build" terminal mockup
+   HERO RIGHT — animated workflow automation mockup
 ═══════════════════════════════════════════════════════════ */
-function SolutionMockup() {
-  const lines = [
-    { text: "$ scaffold --project custom-portal",       color: "#94b500",              delay: 0 },
-    { text: "  ✓ Requirements mapped",                   color: "rgba(255,255,255,0.7)", delay: 600 },
-    { text: "  ✓ Architecture designed",                 color: "rgba(255,255,255,0.7)", delay: 1100 },
-    { text: "  ✓ Sprint 1 shipped",                      color: "rgba(255,255,255,0.7)", delay: 1600 },
-    { text: "  ✓ User testing passed",                   color: "rgba(255,255,255,0.7)", delay: 2100 },
-    { text: "  ✓ Production deployed",                   color: "#94b500",              delay: 2600 },
-    { text: "  → ROI measured in week 1.",               color: "rgba(255,255,255,0.4)", delay: 3100 },
+function AutomationMockup() {
+  const steps = [
+    { label: "Form Submitted",      icon: "📋", status: "trigger" },
+    { label: "Data Validated",      icon: "✅", status: "step"    },
+    { label: "CRM Updated",         icon: "☁️", status: "step"    },
+    { label: "Invoice Generated",   icon: "🧾", status: "step"    },
+    { label: "Slack Notified",      icon: "💬", status: "step"    },
+    { label: "Email Sent",          icon: "📧", status: "done"    },
   ];
 
-  const [visibleCount, setVisibleCount] = useState(0);
+  const [activeStep, setActiveStep] = useState(0);
+  const [running, setRunning] = useState(true);
 
   useEffect(() => {
-    if (visibleCount >= lines.length) return;
-    const t = setTimeout(() => setVisibleCount((c) => c + 1), lines[visibleCount]?.delay ?? 0);
+    if (!running) return;
+    if (activeStep >= steps.length) {
+      const reset = setTimeout(() => setActiveStep(0), 1800);
+      return () => clearTimeout(reset);
+    }
+    const t = setTimeout(() => setActiveStep((p) => p + 1), 750);
     return () => clearTimeout(t);
-  }, [visibleCount]);
+  }, [activeStep, running]);
 
-  // restart loop
-  useEffect(() => {
-    const loop = setInterval(() => setVisibleCount(0), 5000);
-    return () => clearInterval(loop);
-  }, []);
-
-  const useCases = [
-    { label: "Internal Tool",   icon: "🛠️" },
-    { label: "Client Portal",   icon: "🔐" },
-    { label: "Workflow Engine", icon: "⚙️" },
-    { label: "AI Feature",      icon: "🤖" },
-  ];
-
-  const [activeCase, setActiveCase] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setActiveCase((p) => (p + 1) % useCases.length), 1600);
-    return () => clearInterval(t);
-  }, []);
+  const timeSaved = Math.min(activeStep * 8, 47); // fake "minutes saved" counter
 
   return (
     <div
@@ -209,78 +196,114 @@ function SolutionMockup() {
     >
       {/* header */}
       <div
-        className="flex items-center gap-3 px-6 py-4"
-        style={{ background: "rgba(0,0,0,0.25)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}
+        className="flex items-center justify-between px-6 py-4"
+        style={{ background: "rgba(0,0,0,0.2)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}
       >
-        <div className="flex gap-1.5">
-          {["#ff5f57","#febc2e","#28c840"].map((c) => (
-            <div key={c} className="w-3 h-3 rounded-full" style={{ background: c }} />
-          ))}
-        </div>
-        <span className="text-xs font-mono ml-2" style={{ color: "rgba(255,255,255,0.4)" }}>
-          scaleloom — custom-build
-        </span>
-      </div>
-
-      {/* use-case pills */}
-      <div className="flex gap-2 px-6 pt-5 flex-wrap">
-        {useCases.map((u, i) => (
-          <button
-            key={i}
-            onClick={() => setActiveCase(i)}
-            className="px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-300 flex items-center gap-1.5"
-            style={{
-              background: activeCase === i ? "#94b500" : "rgba(255,255,255,0.07)",
-              color: activeCase === i ? "#fff" : "rgba(255,255,255,0.45)",
-            }}
-          >
-            {u.icon} {u.label}
-          </button>
-        ))}
-      </div>
-
-      {/* terminal output */}
-      <div className="px-6 py-5 font-mono text-sm space-y-1.5" style={{ minHeight: 200 }}>
-        {lines.slice(0, visibleCount).map((line, i) => (
-          <p
-            key={i}
-            style={{
-              color: line.color,
-              opacity: 1,
-              animation: "fadeInLine 0.3s ease",
-            }}
-          >
-            {line.text}
-            {i === visibleCount - 1 && visibleCount < lines.length && (
-              <span style={{ animation: "blink 0.8s step-end infinite", color: "#94b500" }}>▌</span>
-            )}
-          </p>
-        ))}
-      </div>
-
-      {/* metrics row */}
-      <div className="grid grid-cols-3 gap-3 mx-6 mb-6">
-        {[
-          { label: "Scope locked",  value: "Week 1" },
-          { label: "First ship",    value: "Week 3" },
-          { label: "Full handover", value: "Week 6" },
-        ].map((m, i) => (
-          <div
-            key={i}
-            className="rounded-xl p-3 text-center"
-            style={{ background: "rgba(255,255,255,0.06)" }}
-          >
-            <p className="text-base font-black" style={{ color: "#94b500" }}>{m.value}</p>
-            <p className="text-[10px] mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>{m.label}</p>
+        <div className="flex items-center gap-3">
+          <div className="flex gap-1.5">
+            {["#ff5f57","#febc2e","#28c840"].map((c) => (
+              <div key={c} className="w-3 h-3 rounded-full" style={{ background: c }} />
+            ))}
           </div>
-        ))}
+          <span className="text-xs font-mono ml-1" style={{ color: "rgba(255,255,255,0.4)" }}>
+            workflow-engine
+          </span>
+        </div>
+        <button
+          onClick={() => { setRunning((r) => !r); if (!running) setActiveStep(0); }}
+          className="px-3 py-1 rounded-full text-xs font-bold transition-all"
+          style={{
+            background: running ? "rgba(148,181,0,0.2)" : "rgba(255,255,255,0.1)",
+            color: running ? "#94b500" : "rgba(255,255,255,0.5)",
+          }}
+        >
+          {running ? "● Running" : "▶ Run"}
+        </button>
+      </div>
+
+      {/* workflow steps */}
+      <div className="px-6 py-5 space-y-2">
+        {steps.map((step, i) => {
+          const done = i < activeStep;
+          const active = i === activeStep - 1 && activeStep <= steps.length;
+          return (
+            <div
+              key={i}
+              className="flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-500"
+              style={{
+                background: active
+                  ? "rgba(148,181,0,0.15)"
+                  : done
+                  ? "rgba(255,255,255,0.05)"
+                  : "rgba(255,255,255,0.03)",
+                border: active
+                  ? "1px solid rgba(148,181,0,0.4)"
+                  : "1px solid rgba(255,255,255,0.06)",
+                opacity: i > activeStep ? 0.35 : 1,
+                transform: active ? "translateX(4px)" : "translateX(0)",
+              }}
+            >
+              {/* status dot */}
+              <div
+                className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center text-[10px]"
+                style={{
+                  background: done
+                    ? "#94b500"
+                    : active
+                    ? "rgba(148,181,0,0.3)"
+                    : "rgba(255,255,255,0.08)",
+                }}
+              >
+                {done ? "✓" : active ? (
+                  <span style={{ animation: "spin 1s linear infinite", display: "inline-block" }}>⟳</span>
+                ) : "·"}
+              </div>
+
+              <span className="text-base">{step.icon}</span>
+
+              <span
+                className="text-sm font-medium flex-1"
+                style={{ color: done ? "rgba(255,255,255,0.85)" : active ? "#fff" : "rgba(255,255,255,0.35)" }}
+              >
+                {step.label}
+              </span>
+
+              {done && (
+                <span className="text-[10px] font-bold" style={{ color: "#94b500" }}>
+                  done
+                </span>
+              )}
+              {active && (
+                <span className="text-[10px] font-bold" style={{ color: "#94b500", animation: "pulse 1s ease infinite" }}>
+                  running…
+                </span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* time saved counter */}
+      <div
+        className="mx-6 mb-6 rounded-2xl px-5 py-4 flex items-center justify-between"
+        style={{ background: "rgba(148,181,0,0.1)", border: "1px solid rgba(148,181,0,0.2)" }}
+      >
+        <div>
+          <p className="text-xs font-bold tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.4)" }}>
+            Time Saved This Run
+          </p>
+          <p className="text-2xl font-black mt-0.5" style={{ color: "#94b500" }}>
+            {timeSaved} min
+          </p>
+        </div>
+        <div className="text-3xl">⏱️</div>
       </div>
     </div>
   );
 }
 
 /* ═══════════════════════════════════════════════════════════
-   EXTRACTED HOOK COMPONENTS (Rules of Hooks)
+   EXTRACTED SECTION HEADERS  (Rules of Hooks)
 ═══════════════════════════════════════════════════════════ */
 function DeliverablesIntro() {
   const { ref, isVisible } = useInView(0.2);
@@ -292,8 +315,8 @@ function DeliverablesIntro() {
       </h2>
       <div className="w-16 h-1 rounded-full mb-8" style={{ background: "#94b500" }} />
       <p className="text-base leading-relaxed" style={{ color: "#6571ab" }}>
-        Every custom engagement ends with a fully owned, documented, and production-ready
-        system — built precisely for your workflow, not retrofitted from a template.
+        Every digitisation engagement ends with running automations you own outright —
+        documented, tested, and built to operate without babysitting.
       </p>
     </div>
   );
@@ -304,7 +327,7 @@ function ProcessHeader() {
   return (
     <div ref={ref} className="text-center mb-16" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(24px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}>
       <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>The Process</p>
-      <h2 className="text-5xl font-black" style={{ color: "#07187b" }}>Built Around You, Not the Other Way</h2>
+      <h2 className="text-5xl font-black" style={{ color: "#07187b" }}>From Manual to Automatic</h2>
     </div>
   );
 }
@@ -315,7 +338,19 @@ function BenefitsHeader() {
     <div ref={ref} style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(24px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}>
       <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>Business Impact</p>
       <h2 className="text-5xl font-black leading-tight" style={{ color: "#07187b" }}>
-        Why Custom Beats<br />Off-the-Shelf
+        What Happens When<br />Humans Stop Doing Robots' Jobs
+      </h2>
+    </div>
+  );
+}
+
+function UseCaseHeader() {
+  const { ref, isVisible } = useInView(0.15);
+  return (
+    <div ref={ref} style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(24px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}>
+      <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>What We Automate</p>
+      <h2 className="text-5xl font-black leading-tight" style={{ color: "#07187b" }}>
+        Six Workflows We<br />Kill Every Week
       </h2>
     </div>
   );
@@ -364,10 +399,49 @@ function ProcessStep({ step, icon, title, desc, index, total }: {
   );
 }
 
+function UseCaseCard({ icon, title, desc, index }: {
+  icon: string; title: string; desc: string; index: number;
+}) {
+  const { ref, isVisible } = useInView(0.15);
+  return (
+    <div
+      ref={ref}
+      className="group relative rounded-3xl p-7 overflow-hidden cursor-default"
+      style={{
+        background: "#fff",
+        border: "1px solid rgba(7,24,123,0.08)",
+        boxShadow: "0 4px 24px rgba(7,24,123,0.05)",
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "translateY(0)" : "translateY(28px)",
+        transition: `opacity 0.6s ease ${index * 100}ms, transform 0.6s ease ${index * 100}ms`,
+      }}
+    >
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100"
+        style={{
+          background: "linear-gradient(135deg,rgba(7,24,123,0.03),rgba(148,181,0,0.06))",
+          transition: "opacity 0.3s ease",
+        }}
+      />
+      <div className="relative z-10">
+        <div
+          className="w-11 h-11 rounded-2xl flex items-center justify-center text-xl mb-4"
+          style={{ background: "rgba(148,181,0,0.12)" }}
+        >
+          {icon}
+        </div>
+        <div className="w-6 h-[3px] mb-3 rounded-full" style={{ background: "#94b500" }} />
+        <h3 className="text-base font-bold mb-2" style={{ color: "#07187b" }}>{title}</h3>
+        <p className="text-sm leading-relaxed" style={{ color: "#6571ab" }}>{desc}</p>
+      </div>
+    </div>
+  );
+}
+
 /* ═══════════════════════════════════════════════════════════
    MAIN PAGE
 ═══════════════════════════════════════════════════════════ */
-export default function CustomSolutionsPage() {
+export default function DigitisationPage() {
   const [heroVisible, setHeroVisible] = useState(false);
   useEffect(() => {
     const t = setTimeout(() => setHeroVisible(true), 80);
@@ -376,85 +450,109 @@ export default function CustomSolutionsPage() {
 
   const deliverables = [
     {
-      text: "Fully scoped solution design document",
-      sub: "A precise technical blueprint covering architecture, data models, and integration points — signed off before a single line of code is written.",
+      text: "End-to-end workflow automation",
+      sub: "Every manual, multi-step process mapped and replaced with a reliable, monitored automation that runs 24/7 without intervention.",
     },
     {
-      text: "Purpose-built application or internal tool",
-      sub: "Whether it's an internal ops portal, client-facing workflow engine, or AI-powered feature — engineered exactly for your use case.",
+      text: "Digital forms & document pipelines",
+      sub: "Paper forms, email chains, and spreadsheet hand-offs replaced with structured digital inputs that flow directly into your systems.",
     },
     {
-      text: "End-to-end testing suite",
-      sub: "Unit, integration, and UAT tests written alongside the code. What ships is what was agreed on, provably.",
+      text: "System-to-system data sync",
+      sub: "Your CRM, ERP, billing, and ops tools kept in sync automatically — no exports, no copy-paste, no stale data.",
     },
     {
-      text: "Full source code & IP ownership",
-      sub: "Everything we build is yours. No licence fees, no vendor dependency — complete transfer of ownership at handover.",
+      text: "Monitoring, alerting & audit logs",
+      sub: "Every automation run is logged. Failures alert your team instantly. You have full visibility into what ran, when, and why.",
     },
     {
-      text: "Onboarding, docs & 30-day support",
-      sub: "Live walkthrough sessions, written runbooks, and a dedicated support channel for the first 30 days post-launch.",
+      text: "Runbooks, training & 30-day support",
+      sub: "Your team learns to own it. Full documentation, live training sessions, and 30 days of dedicated post-launch support included.",
     },
   ];
 
   const benefits = [
     {
+      icon: "⏰",
+      title: "Reclaim 15+ Hours Per Week",
+      description: "The average knowledge worker spends 4+ hours a day on repetitive tasks. Automation hands that time back — every single week, forever.",
+    },
+    {
       icon: "🎯",
-      title: "Fits Like a Glove",
-      description: "Off-the-shelf tools make you adapt your workflow to their limitations. Custom solutions are shaped around how your team actually works — no compromises.",
+      title: "Zero Manual Errors",
+      description: "Humans make mistakes on repetitive work. Automations don't. Every record is consistent, every notification fires, every handoff completes.",
     },
     {
-      icon: "📉",
-      title: "Kills Hidden Costs",
-      description: "Stitching together SaaS tools adds up fast. A single purpose-built solution often costs less than 12 months of the subscriptions it replaces.",
+      icon: "📈",
+      title: "Scale Without Hiring",
+      description: "Automated processes handle 10× the volume with no additional headcount. Grow your output without growing your payroll.",
     },
     {
-      icon: "🔐",
-      title: "Your Data, Your Rules",
-      description: "Full control over where data lives and how it flows. Critical for regulated industries, privacy-conscious teams, or businesses with complex compliance needs.",
-    },
-    {
-      icon: "⚡",
-      title: "Competitive Moat",
-      description: "A tool built around your exact process is one your competitors can't buy off the shelf. It becomes a genuine operational advantage.",
+      icon: "🔍",
+      title: "Full Audit Trail",
+      description: "Every automated action is logged with timestamps and payloads. Compliance, debugging, and reporting become trivial.",
     },
   ];
 
   const processSteps = [
     {
-      icon: "🔍",
-      title: "Discovery Workshop",
-      desc: "We map your current workflow, pain points, and success metrics in a structured session — leaving with a shared understanding of the problem.",
+      icon: "🗺️",
+      title: "Process Mapping",
+      desc: "We shadow your team, document every manual step, and identify which workflows have the highest automation ROI.",
     },
     {
       icon: "📐",
-      title: "Solution Architecture",
-      desc: "We design the technical blueprint — stack, data model, integrations, and phasing — and present it for sign-off before any build begins.",
+      title: "Automation Design",
+      desc: "We design the trigger-action architecture — tools, conditions, error paths — and present it for sign-off before building.",
     },
     {
       icon: "⚙️",
-      title: "Iterative Build",
-      desc: "Two-week sprints with live demos each cycle. You steer. We build. Nothing ships that hasn't been reviewed and approved.",
+      title: "Build & Connect",
+      desc: "We wire up the automation using the right tool for each job — native integrations, custom code, or low-code where it fits.",
     },
     {
       icon: "🧪",
-      title: "Test & Harden",
-      desc: "Automated tests, UAT sessions, and a staging environment that mirrors production — so go-live is boring, not stressful.",
+      title: "Test & Validate",
+      desc: "Every edge case, failure mode, and volume scenario tested in staging before a single live record is touched.",
     },
     {
       icon: "🚀",
-      title: "Launch & Hand Over",
-      desc: "Production deployment, team onboarding, full docs, and 30 days of dedicated post-launch support included in every engagement.",
+      title: "Go Live & Monitor",
+      desc: "Staged rollout, alerting dashboards live from day one, and 30 days of monitoring and support post-launch.",
     },
   ];
 
-  const useCaseExamples = [
-    { icon: "🛠️", title: "Internal Operations Tool",    desc: "Replace spreadsheets and tribal knowledge with a purpose-built ops platform your whole team can use." },
-    { icon: "🔐", title: "Customer / Client Portal",     desc: "Give your clients a branded, self-serve experience — orders, status, files, comms — all in one place." },
-    { icon: "🤖", title: "AI-Powered Feature",           desc: "Embed LLMs, vision models, or recommendation engines directly into your product or workflow." },
-    { icon: "🔄", title: "Workflow Automation Engine",   desc: "Replace manual, multi-step processes with rules-driven automation that runs 24/7 without intervention." },
-    { icon: "📊", title: "Reporting & Analytics Layer",  desc: "Custom metrics, drill-downs, and exports built around your KPIs — not a generic BI tool's defaults." },
-    { icon: "🔗", title: "Legacy System Modernisation",  desc: "Wrap or replace ageing systems with modern APIs and interfaces, without a risky full rewrite." },
+  const useCases = [
+    {
+      icon: "📥",
+      title: "Lead Capture to CRM",
+      desc: "Every form submission, ad lead, or inbound email automatically creates a CRM record, assigns an owner, and fires a follow-up sequence.",
+    },
+    {
+      icon: "🧾",
+      title: "Invoice & Billing Automation",
+      desc: "Contracts signed → invoices generated → payment links sent → accounting updated. The entire billing cycle without human touch.",
+    },
+    {
+      icon: "📦",
+      title: "Order & Fulfilment Workflows",
+      desc: "Order placed → inventory checked → warehouse notified → shipping booked → customer updated. End-to-end, hands-free.",
+    },
+    {
+      icon: "🗂️",
+      title: "Document Digitisation",
+      desc: "Paper forms, PDFs, and email attachments processed, classified, and filed automatically into the right system with zero manual sorting.",
+    },
+    {
+      icon: "🔔",
+      title: "Approval & Notification Flows",
+      desc: "Leave requests, purchase approvals, and compliance sign-offs routed to the right person automatically and chased if overdue.",
+    },
+    {
+      icon: "📊",
+      title: "Reporting Automation",
+      desc: "Weekly KPI reports, monthly board packs, and daily ops summaries generated and distributed automatically — no manual assembly.",
+    },
   ];
 
   return (
@@ -486,7 +584,7 @@ export default function CustomSolutionsPage() {
             >
               <Link href="/services" className="hover:underline" style={{ color: "#6571ab" }}>Our Services</Link>
               <span style={{ color: "#6571ab" }}>›</span>
-              Custom Solutions
+              Digitisation &amp; Automation
             </p>
 
             <h1
@@ -498,12 +596,12 @@ export default function CustomSolutionsPage() {
                 transition: "opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s",
               }}
             >
-              No Tool<br />
+              Stop Doing<br />
               <span style={{ WebkitTextStroke: "2px #94b500", color: "transparent" }}>
-                Fits?
+                By Hand
               </span>
               <br />
-              <span style={{ color: "#94b500" }}>We Build It.</span>
+              <span style={{ color: "#94b500" }}>What Runs Itself.</span>
             </h1>
 
             <p
@@ -515,10 +613,10 @@ export default function CustomSolutionsPage() {
                 transition: "opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s",
               }}
             >
-              When off-the-shelf software forces you to change your process instead of
-              supporting it, that's a sign you've outgrown it. We engineer bespoke systems
-              — internal tools, portals, automation engines, AI features — built precisely
-              around how your business actually operates.
+              Most businesses are sitting on hundreds of hours of recoverable time — buried
+              in copy-paste workflows, manual reports, and email chains that should never
+              involve a human. We map, digitise, and automate them so your team can focus
+              on work that actually requires them.
             </p>
 
             <div
@@ -536,17 +634,17 @@ export default function CustomSolutionsPage() {
               >
                 Start a Project
               </Link>
-              <Link
+              {/* <Link
                 href="/services"
                 className="px-7 py-3 rounded-full font-semibold text-sm border-2"
                 style={{ borderColor: "#07187b", color: "#07187b" }}
               >
                 All Services →
-              </Link>
+              </Link> */}
             </div>
           </div>
 
-          {/* RIGHT — terminal mockup */}
+          {/* RIGHT — automation mockup */}
           <div
             className="relative"
             style={{
@@ -559,17 +657,17 @@ export default function CustomSolutionsPage() {
               className="absolute -top-6 -right-6 w-64 h-64 rounded-full pointer-events-none"
               style={{ background: "radial-gradient(circle,rgba(148,181,0,0.3) 0%,transparent 70%)" }}
             />
-            <SolutionMockup />
+            <AutomationMockup />
 
             {/* floating badge */}
             <div
               className="absolute -bottom-5 -left-8 rounded-2xl px-5 py-3.5 shadow-xl flex items-center gap-3"
               style={{ background: "#fff", animation: "float 3s ease-in-out infinite" }}
             >
-              <span className="text-xl">🛠️</span>
+              <span className="text-xl">⏱️</span>
               <div>
-                <p className="text-xs" style={{ color: "#6571ab" }}>Avg. time to first ship</p>
-                <p className="font-bold text-base" style={{ color: "#07187b" }}>2–3 Weeks</p>
+                <p className="text-xs" style={{ color: "#6571ab" }}>Avg. time recovered</p>
+                <p className="font-bold text-base" style={{ color: "#07187b" }}>15+ hrs / week</p>
               </div>
             </div>
           </div>
@@ -580,17 +678,17 @@ export default function CustomSolutionsPage() {
       <section className="py-14" style={{ background: "linear-gradient(90deg,#07187b 0%,#0d2299 100%)" }}>
         <div className="max-w-7xl mx-auto px-10 grid grid-cols-4 gap-4 divide-x divide-white/10">
           {[
-            { value: "70+",  label: "Custom Solutions Shipped" },
-            { value: "8×",   label: "Avg. ROI Vs SaaS Spend"  },
-            { value: "100%", label: "IP Ownership Transferred" },
-            { value: "30d",  label: "Post-Launch Warranty"     },
+            { value: "200+", label: "Workflows Automated"        },
+            { value: "60%",  label: "Avg. Cost Reduction"        },
+            { value: "0",    label: "Manual Errors Post-Launch"  },
+            { value: "30d",  label: "Post-Launch Warranty"       },
           ].map((s, i) => (
             <StatPill key={i} value={s.value} label={s.label} />
           ))}
         </div>
       </section>
 
-      {/* ─── USE CASE GRID ──────────────────────────────────────── */}
+      {/* ─── USE CASES ──────────────────────────────────────────── */}
       <section className="py-28 relative overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.03]"
@@ -599,7 +697,7 @@ export default function CustomSolutionsPage() {
         <div className="max-w-7xl mx-auto px-10">
           <UseCaseHeader />
           <div className="grid grid-cols-3 gap-6 mt-16">
-            {useCaseExamples.map((u, i) => (
+            {useCases.map((u, i) => (
               <UseCaseCard key={i} icon={u.icon} title={u.title} desc={u.desc} index={i} />
             ))}
           </div>
@@ -667,69 +765,15 @@ export default function CustomSolutionsPage() {
           0%, 100% { transform: translateY(0); }
           50%       { transform: translateY(-8px); }
         }
-        @keyframes fadeInLine {
-          from { opacity: 0; transform: translateX(-8px); }
-          to   { opacity: 1; transform: translateX(0); }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
         }
-        @keyframes blink {
+        @keyframes pulse {
           0%, 100% { opacity: 1; }
-          50%       { opacity: 0; }
+          50%       { opacity: 0.4; }
         }
       `}</style>
     </main>
-  );
-}
-
-/* ── Use-case card with own hook ── */
-function UseCaseCard({ icon, title, desc, index }: {
-  icon: string; title: string; desc: string; index: number;
-}) {
-  const { ref, isVisible } = useInView(0.15);
-  return (
-    <div
-      ref={ref}
-      className="group relative rounded-3xl p-7 overflow-hidden cursor-default"
-      style={{
-        background: "#fff",
-        border: "1px solid rgba(7,24,123,0.08)",
-        boxShadow: "0 4px 24px rgba(7,24,123,0.05)",
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0)" : "translateY(28px)",
-        transition: `opacity 0.6s ease ${index * 100}ms, transform 0.6s ease ${index * 100}ms`,
-      }}
-    >
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100"
-        style={{
-          background: "linear-gradient(135deg,rgba(7,24,123,0.03),rgba(148,181,0,0.06))",
-          transition: "opacity 0.3s ease",
-        }}
-      />
-      <div className="relative z-10">
-        <div
-          className="w-11 h-11 rounded-2xl flex items-center justify-center text-xl mb-4"
-          style={{ background: "rgba(148,181,0,0.12)" }}
-        >
-          {icon}
-        </div>
-        <div className="w-6 h-[3px] mb-3 rounded-full" style={{ background: "#94b500" }} />
-        <h3 className="text-base font-bold mb-2" style={{ color: "#07187b" }}>{title}</h3>
-        <p className="text-sm leading-relaxed" style={{ color: "#6571ab" }}>{desc}</p>
-      </div>
-    </div>
-  );
-}
-
-function UseCaseHeader() {
-  const { ref, isVisible } = useInView(0.15);
-  return (
-    <div ref={ref} style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(24px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}>
-      <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>
-        What We Build
-      </p>
-      <h2 className="text-5xl font-black leading-tight" style={{ color: "#07187b" }}>
-        Six Problems<br />We Solve Often
-      </h2>
-    </div>
   );
 }

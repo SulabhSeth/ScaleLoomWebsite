@@ -20,17 +20,17 @@ export default function Navbar() {
   
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "Why Us", path: "components/about" },
-    { name: "Our Services", path: "/services" },
-    { name: "Contact", path: "components/contact" },
+    { name: "Why Us", path: "/about" },
+    { name: "Our Services", path: "services" },
+    { name: "Contact", path: "/contact" },
   ];
 
   const services = [
-  { name: "Data Visualization & Analysis", path: "components/services/data-visualization" },
-  { name: "Digitisation & Automations", path: "components/services/digitisation-automation" },
-  { name: "Customised Point Solutions", path: "components/services/custom-solutions" },
-  { name: "API Integrations & Development", path: "components/services/api-integration" },
-  { name: "Website & App Development", path: "components/services/web-development" },
+  { name: "Data Visualization & Analysis", path: "/services/data-visualization" },
+  { name: "Digitisation & Automations", path: "/services/digitisation-automation" },
+  { name: "Customised Point Solutions", path: "/services/custom-solutions" },
+  { name: "API Integrations & Development", path: "/services/api-integration" },
+  { name: "Website & App Development", path: "/services/web-development" },
 ];
 
   return (

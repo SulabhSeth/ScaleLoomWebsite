@@ -28,7 +28,8 @@ function useInView(threshold = 0.15) {
    SUB-COMPONENTS
 ═══════════════════════════════════════════════════════════ */
 
-function DeliverableItem({ text, sub, index }: { text: string; sub: string; index: number }) {
+/* Deliverable row — slides in from left */
+function DeliverableItem({ icon, text, index }: { icon: string; text: string; index: number }) {
   const { ref, isVisible } = useInView(0.2);
   return (
     <div
@@ -52,12 +53,13 @@ function DeliverableItem({ text, sub, index }: { text: string; sub: string; inde
       </div>
       <div>
         <p className="text-base font-semibold" style={{ color: "#07187b" }}>{text}</p>
-        <p className="text-sm mt-0.5 leading-relaxed" style={{ color: "#6571ab" }}>{sub}</p>
+        <p className="text-sm mt-0.5" style={{ color: "#6571ab" }}>{icon}</p>
       </div>
     </div>
   );
 }
 
+/* Benefit card */
 function BenefitCard({ icon, title, description, index }: {
   icon: string; title: string; description: string; index: number;
 }) {
@@ -107,6 +109,7 @@ function BenefitCard({ icon, title, description, index }: {
   );
 }
 
+/* Stat pill */
 function StatPill({ value, label }: { value: string; label: string }) {
   const { ref, isVisible } = useInView(0.2);
   return (
@@ -125,6 +128,7 @@ function StatPill({ value, label }: { value: string; label: string }) {
   );
 }
 
+/* CTA Banner */
 function CtaBanner() {
   const { ref, isVisible } = useInView(0.2);
   return (
@@ -144,18 +148,18 @@ function CtaBanner() {
         }}
       >
         <h2 className="text-5xl font-black text-white mb-6 leading-tight">
-          Ready to Connect<br />
-          <span style={{ color: "#94b500" }}>Your Entire Stack?</span>
+          Ready to Build<br />
+          <span style={{ color: "#94b500" }}>Something Great?</span>
         </h2>
         <p className="text-base mb-10" style={{ color: "rgba(255,255,255,0.65)" }}>
-          Stop juggling disconnected tools. Let's wire everything together — cleanly, reliably, and once.
+          Let's turn your idea into a production-grade product — fast, beautiful, and built to scale.
         </p>
         <Link
           href="/contact"
           className="inline-block px-10 py-4 rounded-full font-bold text-sm text-white"
           style={{ background: "#94b500", boxShadow: "0 8px 30px rgba(148,181,0,0.4)" }}
         >
-          Book a Free Strategy Call →
+          Get Connected →
         </Link>
       </div>
     </section>
@@ -163,189 +167,118 @@ function CtaBanner() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   HERO RIGHT — animated API flow diagram
+   BROWSER MOCKUP  (hero right panel)
 ═══════════════════════════════════════════════════════════ */
-function ApiFlowMockup() {
-  const nodes = [
-    { label: "Your App",    icon: "🖥️", x: "50%",  y: "8%",  anchor: "center" },
-    { label: "Stripe",      icon: "💳", x: "10%",  y: "38%", anchor: "left"   },
-    { label: "Salesforce",  icon: "☁️", x: "75%",  y: "38%", anchor: "right"  },
-    { label: "Slack",       icon: "💬", x: "10%",  y: "68%", anchor: "left"   },
-    { label: "PostgreSQL",  icon: "🗄️", x: "75%",  y: "68%", anchor: "right"  },
-    { label: "OpenAI",      icon: "🤖", x: "50%",  y: "88%", anchor: "center" },
-  ];
+function BrowserMockup() {
+  const tabs = ["Home", "About", "Pricing", "Contact"];
+  const [active, setActive] = useState(0);
 
-  const [pulse, setPulse] = useState(0);
+  // cycle tabs automatically
   useEffect(() => {
-    const t = setInterval(() => setPulse((p) => (p + 1) % nodes.length), 900);
+    const t = setInterval(() => setActive((p) => (p + 1) % tabs.length), 1800);
     return () => clearInterval(t);
   }, []);
 
   return (
     <div
       className="relative rounded-3xl overflow-hidden shadow-2xl"
-      style={{ background: "#07187b", minHeight: 420 }}
+      style={{ background: "#07187b" }}
     >
-      {/* header */}
-      <div className="px-8 pt-7 pb-4 flex items-center justify-between" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-        <div>
-          <p className="text-xs font-bold tracking-widest uppercase mb-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>Integration Hub</p>
-          <p className="text-xl font-black text-white">Live Data Flow</p>
+      {/* browser chrome */}
+      <div
+        className="flex items-center gap-3 px-6 py-4"
+        style={{ background: "rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+      >
+        {/* traffic lights */}
+        <div className="flex gap-1.5">
+          {["#ff5f57","#febc2e","#28c840"].map((c) => (
+            <div key={c} className="w-3 h-3 rounded-full" style={{ background: c }} />
+          ))}
         </div>
-        <div className="px-4 py-1.5 rounded-full text-xs font-bold" style={{ background: "rgba(148,181,0,0.2)", color: "#94b500" }}>
-          ● Active
+        {/* address bar */}
+        <div
+          className="flex-1 mx-4 px-4 py-1.5 rounded-lg text-xs font-mono flex items-center gap-2"
+          style={{ background: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.5)" }}
+        >
+          <span style={{ color: "#94b500" }}>🔒</span>
+          scaleloom.com
         </div>
       </div>
 
-      {/* node graph */}
-      <div className="relative mx-6 my-5" style={{ height: 280 }}>
-        {/* SVG connector lines */}
-        <svg className="absolute inset-0 w-full h-full" style={{ pointerEvents: "none" }}>
-          {nodes.slice(1).map((n, i) => {
-            const cx = parseFloat(nodes[0].x) / 100;
-            const cy = parseFloat(nodes[0].y) / 100;
-            const nx = parseFloat(n.x) / 100;
-            const ny = parseFloat(n.y) / 100;
-            return (
-              <line
-                key={i}
-                x1={`${cx * 100}%`} y1={`${cy * 100 + 6}%`}
-                x2={`${nx * 100}%`} y2={`${ny * 100}%`}
-                stroke={pulse === i + 1 ? "#94b500" : "rgba(255,255,255,0.12)"}
-                strokeWidth={pulse === i + 1 ? 2 : 1}
-                strokeDasharray={pulse === i + 1 ? "6 3" : "0"}
-                style={{ transition: "stroke 0.3s ease, stroke-width 0.3s ease" }}
-              />
-            );
-          })}
-        </svg>
-
-        {/* nodes */}
-        {nodes.map((n, i) => (
-          <div
+      {/* nav tabs */}
+      <div className="flex gap-1 px-6 pt-5">
+        {tabs.map((t, i) => (
+          <button
             key={i}
-            className="absolute flex flex-col items-center"
+            onClick={() => setActive(i)}
+            className="px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-300"
             style={{
-              left: n.x,
-              top: n.y,
-              transform: "translate(-50%, -50%)",
+              background: active === i ? "#94b500" : "rgba(255,255,255,0.07)",
+              color: active === i ? "#fff" : "rgba(255,255,255,0.45)",
             }}
           >
-            <div
-              className="w-11 h-11 rounded-2xl flex items-center justify-center text-lg shadow-lg mb-1.5 transition-all duration-300"
-              style={{
-                background: pulse === i
-                  ? "linear-gradient(135deg,#94b500,#b8d900)"
-                  : "rgba(255,255,255,0.1)",
-                transform: pulse === i ? "scale(1.15)" : "scale(1)",
-                boxShadow: pulse === i ? "0 0 20px rgba(148,181,0,0.5)" : "none",
-              }}
-            >
-              {n.icon}
-            </div>
-            <span
-              className="text-[10px] font-bold whitespace-nowrap"
-              style={{ color: pulse === i ? "#94b500" : "rgba(255,255,255,0.45)" }}
-            >
-              {n.label}
-            </span>
-          </div>
+            {t}
+          </button>
         ))}
       </div>
 
-      {/* bottom log strip */}
-      <div className="mx-6 mb-6 rounded-xl px-4 py-3" style={{ background: "rgba(0,0,0,0.25)" }}>
-        <p className="text-[10px] font-mono" style={{ color: "#94b500" }}>
-          ✓ POST /api/stripe/webhook → 200 OK &nbsp;·&nbsp; 42ms
-        </p>
-        <p className="text-[10px] font-mono mt-1" style={{ color: "rgba(255,255,255,0.35)" }}>
-          → synced to Salesforce CRM &nbsp;·&nbsp; Slack notified
-        </p>
-      </div>
-    </div>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════
-   EXTRACTED HOOK COMPONENTS (Rules of Hooks)
-═══════════════════════════════════════════════════════════ */
-function DeliverablesIntro() {
-  const { ref, isVisible } = useInView(0.2);
-  return (
-    <div ref={ref} style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(24px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}>
-      <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>What You Get</p>
-      <h2 className="text-5xl font-black mb-4 leading-tight" style={{ color: "#07187b" }}>
-        Five Things<br />Delivered to You
-      </h2>
-      <div className="w-16 h-1 rounded-full mb-8" style={{ background: "#94b500" }} />
-      <p className="text-base leading-relaxed" style={{ color: "#6571ab" }}>
-        Every integration engagement ends with production-ready, documented connections your team
-        owns outright — no black-box middleware, no vendor lock-in.
-      </p>
-    </div>
-  );
-}
-
-function ProcessHeader() {
-  const { ref, isVisible } = useInView(0.15);
-  return (
-    <div ref={ref} className="text-center mb-16" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(24px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}>
-      <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>The Process</p>
-      <h2 className="text-5xl font-black" style={{ color: "#07187b" }}>From Scattered Tools to One System</h2>
-    </div>
-  );
-}
-
-function BenefitsHeader() {
-  const { ref, isVisible } = useInView(0.15);
-  return (
-    <div ref={ref} style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(24px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}>
-      <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>Business Impact</p>
-      <h2 className="text-5xl font-black leading-tight" style={{ color: "#07187b" }}>
-        Why It Changes<br />How You Operate
-      </h2>
-    </div>
-  );
-}
-
-function ProcessStep({ step, icon, title, desc, index, total }: {
-  step: number; icon: string; title: string; desc: string; index: number; total: number;
-}) {
-  const { ref, isVisible } = useInView(0.2);
-  return (
-    <div
-      ref={ref}
-      className="relative"
-      style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0)" : "translateY(36px)",
-        transition: `opacity 0.7s ease ${index * 130}ms, transform 0.7s ease ${index * 130}ms`,
-      }}
-    >
-      {index < total - 1 && (
+      {/* hero area */}
+      <div className="px-6 py-8">
         <div
-          className="hidden md:block absolute top-6 h-px z-0"
-          style={{
-            background: "linear-gradient(to right,#94b500,transparent)",
-            width: "calc(100% - 48px)",
-            left: "calc(48px + 8px)",
-          }}
-        />
-      )}
-      <div
-        className="w-12 h-12 rounded-full flex items-center justify-center text-xl mb-5 shadow-lg relative z-10"
-        style={{ background: "linear-gradient(135deg,#07187b,#94b500)" }}
-      >
-        {icon}
+          className="rounded-2xl p-7 mb-4"
+          style={{ background: "rgba(255,255,255,0.05)" }}
+        >
+          <div className="w-24 h-2 rounded-full mb-3" style={{ background: "#94b500", opacity: 0.8 }} />
+          <div className="w-40 h-4 rounded-full mb-2" style={{ background: "rgba(255,255,255,0.2)" }} />
+          <div className="w-32 h-4 rounded-full mb-6" style={{ background: "rgba(255,255,255,0.12)" }} />
+          <div
+            className="inline-block px-5 py-2 rounded-full text-xs font-bold text-white"
+            style={{ background: "linear-gradient(135deg,#07187b,#94b500)" }}
+          >
+            Get Started →
+          </div>
+        </div>
+
+        {/* feature cards row */}
+        <div className="grid grid-cols-3 gap-3">
+          {["⚡ Fast","📱 Mobile","🔒 Secure"].map((f, i) => (
+            <div
+              key={i}
+              className="rounded-xl p-3 text-center text-xs font-semibold"
+              style={{ background: "rgba(255,255,255,0.07)", color: "rgba(255,255,255,0.6)" }}
+            >
+              {f}
+            </div>
+          ))}
+        </div>
       </div>
+
+      {/* mobile preview strip */}
       <div
-        className="rounded-2xl p-5"
-        style={{ background: "#fff", border: "1px solid rgba(7,24,123,0.08)", boxShadow: "0 4px 20px rgba(7,24,123,0.05)" }}
+        className="flex items-center justify-center gap-4 px-6 pb-7"
       >
-        <div className="w-6 h-[3px] mb-3 rounded-full" style={{ background: "#94b500" }} />
-        <p className="text-[11px] font-black tracking-widest uppercase mb-1" style={{ color: "#94b500" }}>Step {step}</p>
-        <h3 className="text-sm font-bold mb-2 leading-snug" style={{ color: "#07187b" }}>{title}</h3>
-        <p className="text-xs leading-relaxed" style={{ color: "#6571ab" }}>{desc}</p>
+        <div
+          className="rounded-xl overflow-hidden shadow-lg flex-shrink-0"
+          style={{ width: 56, height: 96, background: "rgba(255,255,255,0.09)", border: "2px solid rgba(255,255,255,0.12)" }}
+        >
+          <div className="h-3 mx-2 mt-3 rounded-full" style={{ background: "rgba(148,181,0,0.5)" }} />
+          <div className="h-2 mx-2 mt-2 rounded-full" style={{ background: "rgba(255,255,255,0.15)" }} />
+          <div className="h-2 mx-2 mt-1 rounded-full w-3/4" style={{ background: "rgba(255,255,255,0.1)" }} />
+          <div className="mx-2 mt-3 rounded-lg" style={{ height: 32, background: "rgba(148,181,0,0.2)" }} />
+        </div>
+        <div className="text-center">
+          <p className="text-xs font-bold" style={{ color: "rgba(255,255,255,0.4)" }}>Works everywhere</p>
+          <p className="text-xs mt-0.5" style={{ color: "#94b500" }}>Web · iOS · Android</p>
+        </div>
+        <div
+          className="rounded-xl overflow-hidden shadow-lg flex-shrink-0"
+          style={{ width: 56, height: 96, background: "rgba(255,255,255,0.09)", border: "2px solid rgba(255,255,255,0.12)" }}
+        >
+          <div className="h-3 mx-2 mt-3 rounded-full" style={{ background: "rgba(148,181,0,0.5)" }} />
+          <div className="h-2 mx-2 mt-2 rounded-full" style={{ background: "rgba(255,255,255,0.15)" }} />
+          <div className="h-2 mx-2 mt-1 rounded-full w-3/4" style={{ background: "rgba(255,255,255,0.1)" }} />
+          <div className="mx-2 mt-3 rounded-lg" style={{ height: 32, background: "rgba(148,181,0,0.2)" }} />
+        </div>
       </div>
     </div>
   );
@@ -354,7 +287,7 @@ function ProcessStep({ step, icon, title, desc, index, total }: {
 /* ═══════════════════════════════════════════════════════════
    MAIN PAGE
 ═══════════════════════════════════════════════════════════ */
-export default function ApiIntegrationPage() {
+export default function DevPage() {
   const [heroVisible, setHeroVisible] = useState(false);
   useEffect(() => {
     const t = setTimeout(() => setHeroVisible(true), 80);
@@ -362,29 +295,26 @@ export default function ApiIntegrationPage() {
   }, []);
 
   const deliverables = [
-    { text: "Custom API design & documentation",         sub: "RESTful or GraphQL APIs built to your spec, with full OpenAPI/Swagger docs your team can maintain." },
-    { text: "Third-party service integrations",          sub: "Stripe, Salesforce, HubSpot, Slack, Twilio, OpenAI — we connect the tools you already use." },
-    { text: "Webhook pipelines & event architecture",    sub: "Real-time data flows between systems without polling. Reliable, retryable, and monitored." },
-    { text: "Error handling & retry logic",              sub: "Idempotent requests, dead-letter queues, and alerting so no data ever silently drops." },
-    { text: "Integration tests & handover docs",         sub: "Full test suites, runbooks, and a 30-day warranty. You own it completely from day one." },
+    { text: "Faster releases and better retention",  icon: "Continuous delivery pipelines mean your users get improvements weekly, not quarterly." },
+    { text: "Stable production experience",           icon: "99.9% uptime SLAs backed by monitoring, alerting, and on-call runbooks from day one." },
+    { text: "Cross-platform efficiency",              icon: "One codebase. Web, iOS, and Android — built in parallel without tripling your budget." },
+    { text: "Clear support channels",                 icon: "Dedicated Slack channel, documented handover, and 30-day post-launch warranty included." },
   ];
 
   const benefits = [
-    { icon: "🔗", title: "One Source of Truth",        description: "Stop copy-pasting between tools. Data flows automatically — from CRM to billing to ops — the moment something changes." },
-    { icon: "⏱️", title: "Hours Saved Every Week",     description: "Manual exports, CSV uploads, and copy-paste workflows disappear. Your team focuses on work that actually moves the needle." },
-    { icon: "🛡️", title: "Bulletproof Reliability",   description: "Retry logic, circuit breakers, and dead-letter queues ensure your integrations survive failures gracefully — every time." },
-    { icon: "📈", title: "Scales With You",            description: "Async queues and event-driven architecture mean your integrations handle 10 transactions or 10 million without re-engineering." },
+    { icon: "🚀", title: "Ship in Weeks, Not Months",   description: "Our sprint-based process compresses timelines without cutting corners. Your MVP is live before your competitors finish scoping." },
+    { icon: "🎨", title: "Design-First Engineering",    description: "We prototype in Figma before a single line of code is written — saving rework cycles and ensuring what's built is what was envisioned." },
+    { icon: "📱", title: "Mobile-First by Default",     description: "Every interface is built responsive from the ground up. No bolt-on mobile styles — native performance across all screen sizes." },
+    { icon: "🔧", title: "Owned, Not Rented",           description: "Full source code, docs, and CI/CD pipelines handed to you. No lock-in. No black-box vendors." },
   ];
 
   const processSteps = [
-    { icon: "🗺️", title: "Audit & Map",       desc: "We document every tool, data source, and manual handoff in your current stack." },
-    { icon: "🏗️", title: "Architect",         desc: "We design the integration layer — sync vs async, webhooks vs polling, auth flows — before writing a line of code." },
-    { icon: "⚙️", title: "Build & Test",      desc: "We build, mock, and integration-test each connection in a staging environment before it touches production." },
-    { icon: "🚀", title: "Deploy & Monitor",  desc: "We roll out with feature flags, set up alerting dashboards, and watch for anomalies through go-live." },
-    { icon: "📖", title: "Document & Hand Off", desc: "Full runbooks, API docs, and a walkthrough session. Your team owns it — we stay on for 30 days post-launch." },
+    { icon: "🔍", title: "Discovery & Wireframing",       desc: "We map user journeys, define scope, and align on tech stack before a pixel is moved." },
+    { icon: "🎨", title: "Design Sprint & Prototypes",    desc: "High-fidelity Figma prototypes signed off by your team before development begins." },
+    { icon: "⚙️", title: "Iterative Development",         desc: "Two-week sprints with demos every cycle. You see progress — and can steer — constantly." },
+    { icon: "🏪", title: "Beta & App Store Releases",     desc: "Staged rollouts, TestFlight / Play Store betas, and App Store submission handled end-to-end." },
+    { icon: "🛡️", title: "Post-Launch Support",           desc: "30-day warranty, monitoring dashboards, and optional retainer for ongoing feature work." },
   ];
-
-  const integrations = ["Stripe","Salesforce","HubSpot","Slack","Twilio","OpenAI","Shopify","Notion","Zapier","PostgreSQL","Airtable","SendGrid"];
 
   return (
     <main className="min-h-screen bg-white overflow-x-hidden">
@@ -401,6 +331,7 @@ export default function ApiIntegrationPage() {
         />
 
         <div className="max-w-7xl mx-auto px-10 grid grid-cols-2 gap-20 items-center">
+
           {/* LEFT */}
           <div>
             <p
@@ -414,7 +345,7 @@ export default function ApiIntegrationPage() {
             >
               <Link href="/services" className="hover:underline" style={{ color: "#6571ab" }}>Our Services</Link>
               <span style={{ color: "#6571ab" }}>›</span>
-              API Integration
+              Web &amp; App Development
             </p>
 
             <h1
@@ -426,16 +357,16 @@ export default function ApiIntegrationPage() {
                 transition: "opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s",
               }}
             >
-              Your Tools,<br />
+              Sites &amp; Apps<br />
               <span style={{ WebkitTextStroke: "2px #94b500", color: "transparent" }}>
-                Finally
+                Built to
               </span>
               <br />
-              <span style={{ color: "#94b500" }}>Connected.</span>
+              <span style={{ color: "#94b500" }}>Perform.</span>
             </h1>
 
             <p
-              className="text-base leading-relaxed max-w-md mb-10"
+              className="text-base leading-relaxed max-w-md mb-4"
               style={{
                 color: "#6571ab",
                 opacity: heroVisible ? 1 : 0,
@@ -443,9 +374,19 @@ export default function ApiIntegrationPage() {
                 transition: "opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s",
               }}
             >
-              Most businesses run on 10+ disconnected tools. We wire them together
-              with clean, reliable APIs and event-driven pipelines — so data flows
-              automatically and your team stops doing computers' jobs.
+              From marketing sites to production-grade apps — we design, engineer, and
+              ship digital products that look great, load fast, and scale with your business.
+            </p>
+
+            <p
+              className="text-sm font-semibold tracking-wide uppercase mb-10"
+              style={{
+                color: "#94b500",
+                opacity: heroVisible ? 1 : 0,
+                transition: "opacity 0.7s ease 0.25s",
+              }}
+            >
+              Web · iOS · Android · Cross-Platform
             </p>
 
             <div
@@ -463,17 +404,17 @@ export default function ApiIntegrationPage() {
               >
                 Start a Project
               </Link>
-              <Link
+              {/* <Link
                 href="/services"
                 className="px-7 py-3 rounded-full font-semibold text-sm border-2"
                 style={{ borderColor: "#07187b", color: "#07187b" }}
               >
                 All Services →
-              </Link>
+              </Link> */}
             </div>
           </div>
 
-          {/* RIGHT — API flow mockup */}
+          {/* RIGHT — browser + floating badge */}
           <div
             className="relative"
             style={{
@@ -486,17 +427,17 @@ export default function ApiIntegrationPage() {
               className="absolute -top-6 -right-6 w-64 h-64 rounded-full pointer-events-none"
               style={{ background: "radial-gradient(circle,rgba(148,181,0,0.3) 0%,transparent 70%)" }}
             />
-            <ApiFlowMockup />
+            <BrowserMockup />
 
             {/* floating badge */}
             <div
               className="absolute -bottom-5 -left-8 rounded-2xl px-5 py-3.5 shadow-xl flex items-center gap-3"
               style={{ background: "#fff", animation: "float 3s ease-in-out infinite" }}
             >
-              <span className="text-xl">🔗</span>
+              <span className="text-xl">⚡</span>
               <div>
-                <p className="text-xs" style={{ color: "#6571ab" }}>Avg. integration time</p>
-                <p className="font-bold text-base" style={{ color: "#07187b" }}>1–2 Weeks</p>
+                <p className="text-xs" style={{ color: "#6571ab" }}>Avg. time to MVP</p>
+                <p className="font-bold text-base" style={{ color: "#07187b" }}>3–5 Weeks</p>
               </div>
             </div>
           </div>
@@ -507,36 +448,12 @@ export default function ApiIntegrationPage() {
       <section className="py-14" style={{ background: "linear-gradient(90deg,#07187b 0%,#0d2299 100%)" }}>
         <div className="max-w-7xl mx-auto px-10 grid grid-cols-4 gap-4 divide-x divide-white/10">
           {[
-            { value: "80+",  label: "APIs Integrated" },
-            { value: "99.97%", label: "Uptime Across Pipelines" },
-            { value: "12×",  label: "Faster Than Manual Sync" },
-            { value: "30d",  label: "Post-Launch Warranty" },
+            { value: "50+",   label: "Apps Shipped to Store" },
+            { value: "99.9%", label: "Production Uptime SLA" },
+            { value: "3×",    label: "Faster Than Agency Average" },
+            { value: "30d",   label: "Post-Launch Warranty" },
           ].map((s, i) => (
             <StatPill key={i} value={s.value} label={s.label} />
-          ))}
-        </div>
-      </section>
-
-      {/* ─── INTEGRATIONS MARQUEE ───────────────────────────────── */}
-      <section className="py-14 overflow-hidden" style={{ borderBottom: "1px solid rgba(7,24,123,0.07)" }}>
-        <p className="text-center text-xs font-bold tracking-[0.3em] uppercase mb-8" style={{ color: "#6571ab" }}>
-          Platforms We Integrate With
-        </p>
-        <div className="relative flex gap-6 overflow-hidden">
-          {/* duplicate for seamless loop */}
-          {[...integrations, ...integrations].map((name, i) => (
-            <div
-              key={i}
-              className="flex-shrink-0 px-6 py-3 rounded-full font-semibold text-sm whitespace-nowrap"
-              style={{
-                background: "rgba(7,24,123,0.05)",
-                border: "1px solid rgba(7,24,123,0.1)",
-                color: "#07187b",
-                animation: "marquee 22s linear infinite",
-              }}
-            >
-              {name}
-            </div>
           ))}
         </div>
       </section>
@@ -548,10 +465,13 @@ export default function ApiIntegrationPage() {
           style={{ backgroundImage: "radial-gradient(#07187b 1px,transparent 1px)", backgroundSize: "28px 28px" }}
         />
         <div className="max-w-7xl mx-auto px-10 grid grid-cols-2 gap-20 items-center">
+          {/* LEFT */}
           <DeliverablesIntro />
+
+          {/* RIGHT */}
           <div className="flex flex-col gap-4">
             {deliverables.map((d, i) => (
-              <DeliverableItem key={i} text={d.text} sub={d.sub} index={i} />
+              <DeliverableItem key={i} text={d.text} icon={d.icon} index={i} />
             ))}
           </div>
         </div>
@@ -568,9 +488,11 @@ export default function ApiIntegrationPage() {
         />
         <div className="max-w-7xl mx-auto px-10">
           <ProcessHeader />
+
+          {/* 5-step vertical-ish zigzag on wide, grid on desktop */}
           <div className="grid grid-cols-5 gap-6 relative">
-            {processSteps.map((s, i) => (
-              <ProcessStep key={i} step={i + 1} icon={s.icon} title={s.title} desc={s.desc} index={i} total={processSteps.length} />
+            {processSteps.map((step, i) => (
+              <ProcessStep key={i} step={i + 1} icon={step.icon} title={step.title} desc={step.desc} index={i} total={processSteps.length} />
             ))}
           </div>
         </div>
@@ -599,11 +521,130 @@ export default function ApiIntegrationPage() {
           0%, 100% { transform: translateY(0); }
           50%       { transform: translateY(-8px); }
         }
-        @keyframes marquee {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
       `}</style>
     </main>
+  );
+}
+
+/* ── Extracted to satisfy Rules of Hooks (no hooks inside render callbacks) ── */
+function DeliverablesIntro() {
+  const { ref, isVisible } = useInView(0.2);
+  return (
+    <div
+      ref={ref}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "none" : "translateY(24px)",
+        transition: "opacity 0.7s ease, transform 0.7s ease",
+      }}
+    >
+      <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>
+        What You Get
+      </p>
+      <h2 className="text-5xl font-black mb-4 leading-tight" style={{ color: "#07187b" }}>
+        Four Outcomes<br />Guaranteed
+      </h2>
+      <div className="w-16 h-1 rounded-full mb-8" style={{ background: "#94b500" }} />
+      <p className="text-base leading-relaxed" style={{ color: "#6571ab" }}>
+        Every engagement ends with a production-ready product fully owned by you —
+        source code, pipelines, docs, and a team that knows how to maintain it.
+      </p>
+    </div>
+  );
+}
+
+function ProcessHeader() {
+  const { ref, isVisible } = useInView(0.15);
+  return (
+    <div
+      ref={ref}
+      className="text-center mb-16"
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "none" : "translateY(24px)",
+        transition: "opacity 0.7s ease, transform 0.7s ease",
+      }}
+    >
+      <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>
+        The Process
+      </p>
+      <h2 className="text-5xl font-black" style={{ color: "#07187b" }}>
+        From Idea to App Store
+      </h2>
+    </div>
+  );
+}
+
+function BenefitsHeader() {
+  const { ref, isVisible } = useInView(0.15);
+  return (
+    <div
+      ref={ref}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "none" : "translateY(24px)",
+        transition: "opacity 0.7s ease, transform 0.7s ease",
+      }}
+    >
+      <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>
+        Why It Works
+      </p>
+      <h2 className="text-5xl font-black leading-tight" style={{ color: "#07187b" }}>
+        Built Different,<br />By Design
+      </h2>
+    </div>
+  );
+}
+
+function ProcessStep({ step, icon, title, desc, index, total }: {
+  step: number; icon: string; title: string; desc: string; index: number; total: number;
+}) {
+  const { ref, isVisible } = useInView(0.2);
+  return (
+    <div
+      ref={ref}
+      className="relative"
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "translateY(0)" : "translateY(36px)",
+        transition: `opacity 0.7s ease ${index * 120}ms, transform 0.7s ease ${index * 120}ms`,
+      }}
+    >
+      {/* connector line */}
+      {index < total - 1 && (
+        <div
+          className="hidden md:block absolute top-6 h-px z-0"
+          style={{
+            background: "linear-gradient(to right,#94b500,transparent)",
+            width: "calc(100% - 48px)",
+            left: "calc(48px + 8px)",
+          }}
+        />
+      )}
+
+      {/* number bubble */}
+      <div
+        className="w-12 h-12 rounded-full flex items-center justify-center font-black text-base mb-5 shadow-lg relative z-10 text-white"
+        style={{ background: "linear-gradient(135deg,#07187b,#94b500)" }}
+      >
+        {icon}
+      </div>
+
+      <div
+        className="rounded-2xl p-5"
+        style={{
+          background: "#fff",
+          border: "1px solid rgba(7,24,123,0.08)",
+          boxShadow: "0 4px 20px rgba(7,24,123,0.05)",
+        }}
+      >
+        <div className="w-6 h-[3px] mb-3 rounded-full" style={{ background: "#94b500" }} />
+        <p className="text-[11px] font-black tracking-widest uppercase mb-1" style={{ color: "#94b500" }}>
+          Step {step}
+        </p>
+        <h3 className="text-sm font-bold mb-2 leading-snug" style={{ color: "#07187b" }}>{title}</h3>
+        <p className="text-xs leading-relaxed" style={{ color: "#6571ab" }}>{desc}</p>
+      </div>
+    </div>
   );
 }

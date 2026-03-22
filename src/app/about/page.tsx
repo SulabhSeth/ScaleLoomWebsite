@@ -133,7 +133,7 @@ function CtaBanner() {
           className="px-10 py-4 rounded-full font-bold text-sm"
           style={{ background: "#94b500", color: "#fff", boxShadow: "0 8px 30px rgba(148,181,0,0.4)" }}
         >
-          Book a Free Strategy Call →
+          Get Started today →
         </button>
       </div>
     </section>
@@ -249,18 +249,18 @@ export default function AboutPage() {
                   transition: "opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s",
                 }}
               >
-                <button
+                {/* <button
                   className="px-7 py-3 rounded-full font-semibold text-sm text-white"
                   style={{ background: "linear-gradient(135deg,#07187b,#94b500)" }}
                 >
                   Start a Project
-                </button>
-                <button
+                </button> */}
+                {/* <button
                   className="px-7 py-3 rounded-full font-semibold text-sm border-2"
                   style={{ borderColor: "#07187b", color: "#07187b" }}
                 >
                   See Our Work →
-                </button>
+                </button> */}
               </div>
             </div>
 

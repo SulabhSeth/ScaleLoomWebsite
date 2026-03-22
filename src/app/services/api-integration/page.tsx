@@ -25,8 +25,9 @@ function useInView(threshold = 0.15) {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SHARED UI COMPONENTS
+   SUB-COMPONENTS
 ═══════════════════════════════════════════════════════════ */
+
 function DeliverableItem({ text, sub, index }: { text: string; sub: string; index: number }) {
   const { ref, isVisible } = useInView(0.2);
   return (
@@ -143,18 +144,18 @@ function CtaBanner() {
         }}
       >
         <h2 className="text-5xl font-black text-white mb-6 leading-tight">
-          Still Doing It<br />
-          <span style={{ color: "#94b500" }}>Manually?</span>
+          Ready to Connect<br />
+          <span style={{ color: "#94b500" }}>Your Entire Stack?</span>
         </h2>
         <p className="text-base mb-10" style={{ color: "rgba(255,255,255,0.65)" }}>
-          Every hour your team spends on repetitive tasks is an hour not spent growing the business. Let's fix that.
+          Stop juggling disconnected tools. Let's wire everything together — cleanly, reliably, and once.
         </p>
         <Link
           href="/contact"
           className="inline-block px-10 py-4 rounded-full font-bold text-sm text-white"
           style={{ background: "#94b500", boxShadow: "0 8px 30px rgba(148,181,0,0.4)" }}
         >
-          Book a Free Strategy Call →
+          Connect with Us →
         </Link>
       </div>
     </section>
@@ -162,148 +163,111 @@ function CtaBanner() {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   HERO RIGHT — animated workflow automation mockup
+   HERO RIGHT — animated API flow diagram
 ═══════════════════════════════════════════════════════════ */
-function AutomationMockup() {
-  const steps = [
-    { label: "Form Submitted",      icon: "📋", status: "trigger" },
-    { label: "Data Validated",      icon: "✅", status: "step"    },
-    { label: "CRM Updated",         icon: "☁️", status: "step"    },
-    { label: "Invoice Generated",   icon: "🧾", status: "step"    },
-    { label: "Slack Notified",      icon: "💬", status: "step"    },
-    { label: "Email Sent",          icon: "📧", status: "done"    },
+function ApiFlowMockup() {
+  const nodes = [
+    { label: "Your App",    icon: "🖥️", x: "50%",  y: "8%",  anchor: "center" },
+    { label: "Stripe",      icon: "💳", x: "10%",  y: "38%", anchor: "left"   },
+    { label: "Salesforce",  icon: "☁️", x: "75%",  y: "38%", anchor: "right"  },
+    { label: "Slack",       icon: "💬", x: "10%",  y: "68%", anchor: "left"   },
+    { label: "PostgreSQL",  icon: "🗄️", x: "75%",  y: "68%", anchor: "right"  },
+    { label: "OpenAI",      icon: "🤖", x: "50%",  y: "88%", anchor: "center" },
   ];
 
-  const [activeStep, setActiveStep] = useState(0);
-  const [running, setRunning] = useState(true);
-
+  const [pulse, setPulse] = useState(0);
   useEffect(() => {
-    if (!running) return;
-    if (activeStep >= steps.length) {
-      const reset = setTimeout(() => setActiveStep(0), 1800);
-      return () => clearTimeout(reset);
-    }
-    const t = setTimeout(() => setActiveStep((p) => p + 1), 750);
-    return () => clearTimeout(t);
-  }, [activeStep, running]);
-
-  const timeSaved = Math.min(activeStep * 8, 47); // fake "minutes saved" counter
+    const t = setInterval(() => setPulse((p) => (p + 1) % nodes.length), 900);
+    return () => clearInterval(t);
+  }, []);
 
   return (
     <div
       className="relative rounded-3xl overflow-hidden shadow-2xl"
-      style={{ background: "#07187b" }}
+      style={{ background: "#07187b", minHeight: 420 }}
     >
       {/* header */}
-      <div
-        className="flex items-center justify-between px-6 py-4"
-        style={{ background: "rgba(0,0,0,0.2)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}
-      >
-        <div className="flex items-center gap-3">
-          <div className="flex gap-1.5">
-            {["#ff5f57","#febc2e","#28c840"].map((c) => (
-              <div key={c} className="w-3 h-3 rounded-full" style={{ background: c }} />
-            ))}
-          </div>
-          <span className="text-xs font-mono ml-1" style={{ color: "rgba(255,255,255,0.4)" }}>
-            workflow-engine
-          </span>
+      <div className="px-8 pt-7 pb-4 flex items-center justify-between" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+        <div>
+          <p className="text-xs font-bold tracking-widest uppercase mb-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>Integration Hub</p>
+          <p className="text-xl font-black text-white">Live Data Flow</p>
         </div>
-        <button
-          onClick={() => { setRunning((r) => !r); if (!running) setActiveStep(0); }}
-          className="px-3 py-1 rounded-full text-xs font-bold transition-all"
-          style={{
-            background: running ? "rgba(148,181,0,0.2)" : "rgba(255,255,255,0.1)",
-            color: running ? "#94b500" : "rgba(255,255,255,0.5)",
-          }}
-        >
-          {running ? "● Running" : "▶ Run"}
-        </button>
+        <div className="px-4 py-1.5 rounded-full text-xs font-bold" style={{ background: "rgba(148,181,0,0.2)", color: "#94b500" }}>
+          ● Active
+        </div>
       </div>
 
-      {/* workflow steps */}
-      <div className="px-6 py-5 space-y-2">
-        {steps.map((step, i) => {
-          const done = i < activeStep;
-          const active = i === activeStep - 1 && activeStep <= steps.length;
-          return (
+      {/* node graph */}
+      <div className="relative mx-6 my-5" style={{ height: 280 }}>
+        {/* SVG connector lines */}
+        <svg className="absolute inset-0 w-full h-full" style={{ pointerEvents: "none" }}>
+          {nodes.slice(1).map((n, i) => {
+            const cx = parseFloat(nodes[0].x) / 100;
+            const cy = parseFloat(nodes[0].y) / 100;
+            const nx = parseFloat(n.x) / 100;
+            const ny = parseFloat(n.y) / 100;
+            return (
+              <line
+                key={i}
+                x1={`${cx * 100}%`} y1={`${cy * 100 + 6}%`}
+                x2={`${nx * 100}%`} y2={`${ny * 100}%`}
+                stroke={pulse === i + 1 ? "#94b500" : "rgba(255,255,255,0.12)"}
+                strokeWidth={pulse === i + 1 ? 2 : 1}
+                strokeDasharray={pulse === i + 1 ? "6 3" : "0"}
+                style={{ transition: "stroke 0.3s ease, stroke-width 0.3s ease" }}
+              />
+            );
+          })}
+        </svg>
+
+        {/* nodes */}
+        {nodes.map((n, i) => (
+          <div
+            key={i}
+            className="absolute flex flex-col items-center"
+            style={{
+              left: n.x,
+              top: n.y,
+              transform: "translate(-50%, -50%)",
+            }}
+          >
             <div
-              key={i}
-              className="flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-500"
+              className="w-11 h-11 rounded-2xl flex items-center justify-center text-lg shadow-lg mb-1.5 transition-all duration-300"
               style={{
-                background: active
-                  ? "rgba(148,181,0,0.15)"
-                  : done
-                  ? "rgba(255,255,255,0.05)"
-                  : "rgba(255,255,255,0.03)",
-                border: active
-                  ? "1px solid rgba(148,181,0,0.4)"
-                  : "1px solid rgba(255,255,255,0.06)",
-                opacity: i > activeStep ? 0.35 : 1,
-                transform: active ? "translateX(4px)" : "translateX(0)",
+                background: pulse === i
+                  ? "linear-gradient(135deg,#94b500,#b8d900)"
+                  : "rgba(255,255,255,0.1)",
+                transform: pulse === i ? "scale(1.15)" : "scale(1)",
+                boxShadow: pulse === i ? "0 0 20px rgba(148,181,0,0.5)" : "none",
               }}
             >
-              {/* status dot */}
-              <div
-                className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center text-[10px]"
-                style={{
-                  background: done
-                    ? "#94b500"
-                    : active
-                    ? "rgba(148,181,0,0.3)"
-                    : "rgba(255,255,255,0.08)",
-                }}
-              >
-                {done ? "✓" : active ? (
-                  <span style={{ animation: "spin 1s linear infinite", display: "inline-block" }}>⟳</span>
-                ) : "·"}
-              </div>
-
-              <span className="text-base">{step.icon}</span>
-
-              <span
-                className="text-sm font-medium flex-1"
-                style={{ color: done ? "rgba(255,255,255,0.85)" : active ? "#fff" : "rgba(255,255,255,0.35)" }}
-              >
-                {step.label}
-              </span>
-
-              {done && (
-                <span className="text-[10px] font-bold" style={{ color: "#94b500" }}>
-                  done
-                </span>
-              )}
-              {active && (
-                <span className="text-[10px] font-bold" style={{ color: "#94b500", animation: "pulse 1s ease infinite" }}>
-                  running…
-                </span>
-              )}
+              {n.icon}
             </div>
-          );
-        })}
+            <span
+              className="text-[10px] font-bold whitespace-nowrap"
+              style={{ color: pulse === i ? "#94b500" : "rgba(255,255,255,0.45)" }}
+            >
+              {n.label}
+            </span>
+          </div>
+        ))}
       </div>
 
-      {/* time saved counter */}
-      <div
-        className="mx-6 mb-6 rounded-2xl px-5 py-4 flex items-center justify-between"
-        style={{ background: "rgba(148,181,0,0.1)", border: "1px solid rgba(148,181,0,0.2)" }}
-      >
-        <div>
-          <p className="text-xs font-bold tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.4)" }}>
-            Time Saved This Run
-          </p>
-          <p className="text-2xl font-black mt-0.5" style={{ color: "#94b500" }}>
-            {timeSaved} min
-          </p>
-        </div>
-        <div className="text-3xl">⏱️</div>
+      {/* bottom log strip */}
+      <div className="mx-6 mb-6 rounded-xl px-4 py-3" style={{ background: "rgba(0,0,0,0.25)" }}>
+        <p className="text-[10px] font-mono" style={{ color: "#94b500" }}>
+          ✓ POST /api/stripe/webhook → 200 OK &nbsp;·&nbsp; 42ms
+        </p>
+        <p className="text-[10px] font-mono mt-1" style={{ color: "rgba(255,255,255,0.35)" }}>
+          → synced to Salesforce CRM &nbsp;·&nbsp; Slack notified
+        </p>
       </div>
     </div>
   );
 }
 
 /* ═══════════════════════════════════════════════════════════
-   EXTRACTED SECTION HEADERS  (Rules of Hooks)
+   EXTRACTED HOOK COMPONENTS (Rules of Hooks)
 ═══════════════════════════════════════════════════════════ */
 function DeliverablesIntro() {
   const { ref, isVisible } = useInView(0.2);
@@ -315,8 +279,8 @@ function DeliverablesIntro() {
       </h2>
       <div className="w-16 h-1 rounded-full mb-8" style={{ background: "#94b500" }} />
       <p className="text-base leading-relaxed" style={{ color: "#6571ab" }}>
-        Every digitisation engagement ends with running automations you own outright —
-        documented, tested, and built to operate without babysitting.
+        Every integration engagement ends with production-ready, documented connections your team
+        owns outright — no black-box middleware, no vendor lock-in.
       </p>
     </div>
   );
@@ -327,7 +291,7 @@ function ProcessHeader() {
   return (
     <div ref={ref} className="text-center mb-16" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(24px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}>
       <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>The Process</p>
-      <h2 className="text-5xl font-black" style={{ color: "#07187b" }}>From Manual to Automatic</h2>
+      <h2 className="text-5xl font-black" style={{ color: "#07187b" }}>From Scattered Tools to One System</h2>
     </div>
   );
 }
@@ -338,19 +302,7 @@ function BenefitsHeader() {
     <div ref={ref} style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(24px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}>
       <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>Business Impact</p>
       <h2 className="text-5xl font-black leading-tight" style={{ color: "#07187b" }}>
-        What Happens When<br />Humans Stop Doing Robots' Jobs
-      </h2>
-    </div>
-  );
-}
-
-function UseCaseHeader() {
-  const { ref, isVisible } = useInView(0.15);
-  return (
-    <div ref={ref} style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(24px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}>
-      <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>What We Automate</p>
-      <h2 className="text-5xl font-black leading-tight" style={{ color: "#07187b" }}>
-        Six Workflows We<br />Kill Every Week
+        Why It Changes<br />How You Operate
       </h2>
     </div>
   );
@@ -399,49 +351,10 @@ function ProcessStep({ step, icon, title, desc, index, total }: {
   );
 }
 
-function UseCaseCard({ icon, title, desc, index }: {
-  icon: string; title: string; desc: string; index: number;
-}) {
-  const { ref, isVisible } = useInView(0.15);
-  return (
-    <div
-      ref={ref}
-      className="group relative rounded-3xl p-7 overflow-hidden cursor-default"
-      style={{
-        background: "#fff",
-        border: "1px solid rgba(7,24,123,0.08)",
-        boxShadow: "0 4px 24px rgba(7,24,123,0.05)",
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0)" : "translateY(28px)",
-        transition: `opacity 0.6s ease ${index * 100}ms, transform 0.6s ease ${index * 100}ms`,
-      }}
-    >
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100"
-        style={{
-          background: "linear-gradient(135deg,rgba(7,24,123,0.03),rgba(148,181,0,0.06))",
-          transition: "opacity 0.3s ease",
-        }}
-      />
-      <div className="relative z-10">
-        <div
-          className="w-11 h-11 rounded-2xl flex items-center justify-center text-xl mb-4"
-          style={{ background: "rgba(148,181,0,0.12)" }}
-        >
-          {icon}
-        </div>
-        <div className="w-6 h-[3px] mb-3 rounded-full" style={{ background: "#94b500" }} />
-        <h3 className="text-base font-bold mb-2" style={{ color: "#07187b" }}>{title}</h3>
-        <p className="text-sm leading-relaxed" style={{ color: "#6571ab" }}>{desc}</p>
-      </div>
-    </div>
-  );
-}
-
 /* ═══════════════════════════════════════════════════════════
    MAIN PAGE
 ═══════════════════════════════════════════════════════════ */
-export default function DigitisationPage() {
+export default function ApiIntegrationPage() {
   const [heroVisible, setHeroVisible] = useState(false);
   useEffect(() => {
     const t = setTimeout(() => setHeroVisible(true), 80);
@@ -449,111 +362,29 @@ export default function DigitisationPage() {
   }, []);
 
   const deliverables = [
-    {
-      text: "End-to-end workflow automation",
-      sub: "Every manual, multi-step process mapped and replaced with a reliable, monitored automation that runs 24/7 without intervention.",
-    },
-    {
-      text: "Digital forms & document pipelines",
-      sub: "Paper forms, email chains, and spreadsheet hand-offs replaced with structured digital inputs that flow directly into your systems.",
-    },
-    {
-      text: "System-to-system data sync",
-      sub: "Your CRM, ERP, billing, and ops tools kept in sync automatically — no exports, no copy-paste, no stale data.",
-    },
-    {
-      text: "Monitoring, alerting & audit logs",
-      sub: "Every automation run is logged. Failures alert your team instantly. You have full visibility into what ran, when, and why.",
-    },
-    {
-      text: "Runbooks, training & 30-day support",
-      sub: "Your team learns to own it. Full documentation, live training sessions, and 30 days of dedicated post-launch support included.",
-    },
+    { text: "Custom API design & documentation",         sub: "RESTful or GraphQL APIs built to your spec, with full OpenAPI/Swagger docs your team can maintain." },
+    { text: "Third-party service integrations",          sub: "Stripe, Salesforce, HubSpot, Slack, Twilio, OpenAI — we connect the tools you already use." },
+    { text: "Webhook pipelines & event architecture",    sub: "Real-time data flows between systems without polling. Reliable, retryable, and monitored." },
+    { text: "Error handling & retry logic",              sub: "Idempotent requests, dead-letter queues, and alerting so no data ever silently drops." },
+    { text: "Integration tests & handover docs",         sub: "Full test suites, runbooks, and a 30-day warranty. You own it completely from day one." },
   ];
 
   const benefits = [
-    {
-      icon: "⏰",
-      title: "Reclaim 15+ Hours Per Week",
-      description: "The average knowledge worker spends 4+ hours a day on repetitive tasks. Automation hands that time back — every single week, forever.",
-    },
-    {
-      icon: "🎯",
-      title: "Zero Manual Errors",
-      description: "Humans make mistakes on repetitive work. Automations don't. Every record is consistent, every notification fires, every handoff completes.",
-    },
-    {
-      icon: "📈",
-      title: "Scale Without Hiring",
-      description: "Automated processes handle 10× the volume with no additional headcount. Grow your output without growing your payroll.",
-    },
-    {
-      icon: "🔍",
-      title: "Full Audit Trail",
-      description: "Every automated action is logged with timestamps and payloads. Compliance, debugging, and reporting become trivial.",
-    },
+    { icon: "🔗", title: "One Source of Truth",        description: "Stop copy-pasting between tools. Data flows automatically — from CRM to billing to ops — the moment something changes." },
+    { icon: "⏱️", title: "Hours Saved Every Week",     description: "Manual exports, CSV uploads, and copy-paste workflows disappear. Your team focuses on work that actually moves the needle." },
+    { icon: "🛡️", title: "Bulletproof Reliability",   description: "Retry logic, circuit breakers, and dead-letter queues ensure your integrations survive failures gracefully — every time." },
+    { icon: "📈", title: "Scales With You",            description: "Async queues and event-driven architecture mean your integrations handle 10 transactions or 10 million without re-engineering." },
   ];
 
   const processSteps = [
-    {
-      icon: "🗺️",
-      title: "Process Mapping",
-      desc: "We shadow your team, document every manual step, and identify which workflows have the highest automation ROI.",
-    },
-    {
-      icon: "📐",
-      title: "Automation Design",
-      desc: "We design the trigger-action architecture — tools, conditions, error paths — and present it for sign-off before building.",
-    },
-    {
-      icon: "⚙️",
-      title: "Build & Connect",
-      desc: "We wire up the automation using the right tool for each job — native integrations, custom code, or low-code where it fits.",
-    },
-    {
-      icon: "🧪",
-      title: "Test & Validate",
-      desc: "Every edge case, failure mode, and volume scenario tested in staging before a single live record is touched.",
-    },
-    {
-      icon: "🚀",
-      title: "Go Live & Monitor",
-      desc: "Staged rollout, alerting dashboards live from day one, and 30 days of monitoring and support post-launch.",
-    },
+    { icon: "🗺️", title: "Audit & Map",       desc: "We document every tool, data source, and manual handoff in your current stack." },
+    { icon: "🏗️", title: "Architect",         desc: "We design the integration layer — sync vs async, webhooks vs polling, auth flows — before writing a line of code." },
+    { icon: "⚙️", title: "Build & Test",      desc: "We build, mock, and integration-test each connection in a staging environment before it touches production." },
+    { icon: "🚀", title: "Deploy & Monitor",  desc: "We roll out with feature flags, set up alerting dashboards, and watch for anomalies through go-live." },
+    { icon: "📖", title: "Document & Hand Off", desc: "Full runbooks, API docs, and a walkthrough session. Your team owns it — we stay on for 30 days post-launch." },
   ];
 
-  const useCases = [
-    {
-      icon: "📥",
-      title: "Lead Capture to CRM",
-      desc: "Every form submission, ad lead, or inbound email automatically creates a CRM record, assigns an owner, and fires a follow-up sequence.",
-    },
-    {
-      icon: "🧾",
-      title: "Invoice & Billing Automation",
-      desc: "Contracts signed → invoices generated → payment links sent → accounting updated. The entire billing cycle without human touch.",
-    },
-    {
-      icon: "📦",
-      title: "Order & Fulfilment Workflows",
-      desc: "Order placed → inventory checked → warehouse notified → shipping booked → customer updated. End-to-end, hands-free.",
-    },
-    {
-      icon: "🗂️",
-      title: "Document Digitisation",
-      desc: "Paper forms, PDFs, and email attachments processed, classified, and filed automatically into the right system with zero manual sorting.",
-    },
-    {
-      icon: "🔔",
-      title: "Approval & Notification Flows",
-      desc: "Leave requests, purchase approvals, and compliance sign-offs routed to the right person automatically and chased if overdue.",
-    },
-    {
-      icon: "📊",
-      title: "Reporting Automation",
-      desc: "Weekly KPI reports, monthly board packs, and daily ops summaries generated and distributed automatically — no manual assembly.",
-    },
-  ];
+  const integrations = ["Stripe","Salesforce","HubSpot","Slack","Twilio","OpenAI","Shopify","Notion","Zapier","PostgreSQL","Airtable","SendGrid"];
 
   return (
     <main className="min-h-screen bg-white overflow-x-hidden">
@@ -570,7 +401,6 @@ export default function DigitisationPage() {
         />
 
         <div className="max-w-7xl mx-auto px-10 grid grid-cols-2 gap-20 items-center">
-
           {/* LEFT */}
           <div>
             <p
@@ -584,7 +414,7 @@ export default function DigitisationPage() {
             >
               <Link href="/services" className="hover:underline" style={{ color: "#6571ab" }}>Our Services</Link>
               <span style={{ color: "#6571ab" }}>›</span>
-              Digitisation &amp; Automation
+              API Integration
             </p>
 
             <h1
@@ -596,12 +426,12 @@ export default function DigitisationPage() {
                 transition: "opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s",
               }}
             >
-              Stop Doing<br />
+              Your Tools,<br />
               <span style={{ WebkitTextStroke: "2px #94b500", color: "transparent" }}>
-                By Hand
+                Finally
               </span>
               <br />
-              <span style={{ color: "#94b500" }}>What Runs Itself.</span>
+              <span style={{ color: "#94b500" }}>Connected.</span>
             </h1>
 
             <p
@@ -613,10 +443,9 @@ export default function DigitisationPage() {
                 transition: "opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s",
               }}
             >
-              Most businesses are sitting on hundreds of hours of recoverable time — buried
-              in copy-paste workflows, manual reports, and email chains that should never
-              involve a human. We map, digitise, and automate them so your team can focus
-              on work that actually requires them.
+              Most businesses run on 10+ disconnected tools. We wire them together
+              with clean, reliable APIs and event-driven pipelines — so data flows
+              automatically and your team stops doing computers' jobs.
             </p>
 
             <div
@@ -634,17 +463,17 @@ export default function DigitisationPage() {
               >
                 Start a Project
               </Link>
-              <Link
+              {/* <Link
                 href="/services"
                 className="px-7 py-3 rounded-full font-semibold text-sm border-2"
                 style={{ borderColor: "#07187b", color: "#07187b" }}
               >
                 All Services →
-              </Link>
+              </Link> */}
             </div>
           </div>
 
-          {/* RIGHT — automation mockup */}
+          {/* RIGHT — API flow mockup */}
           <div
             className="relative"
             style={{
@@ -657,17 +486,17 @@ export default function DigitisationPage() {
               className="absolute -top-6 -right-6 w-64 h-64 rounded-full pointer-events-none"
               style={{ background: "radial-gradient(circle,rgba(148,181,0,0.3) 0%,transparent 70%)" }}
             />
-            <AutomationMockup />
+            <ApiFlowMockup />
 
             {/* floating badge */}
             <div
               className="absolute -bottom-5 -left-8 rounded-2xl px-5 py-3.5 shadow-xl flex items-center gap-3"
               style={{ background: "#fff", animation: "float 3s ease-in-out infinite" }}
             >
-              <span className="text-xl">⏱️</span>
+              <span className="text-xl">🔗</span>
               <div>
-                <p className="text-xs" style={{ color: "#6571ab" }}>Avg. time recovered</p>
-                <p className="font-bold text-base" style={{ color: "#07187b" }}>15+ hrs / week</p>
+                <p className="text-xs" style={{ color: "#6571ab" }}>Avg. integration time</p>
+                <p className="font-bold text-base" style={{ color: "#07187b" }}>1–2 Weeks</p>
               </div>
             </div>
           </div>
@@ -678,40 +507,45 @@ export default function DigitisationPage() {
       <section className="py-14" style={{ background: "linear-gradient(90deg,#07187b 0%,#0d2299 100%)" }}>
         <div className="max-w-7xl mx-auto px-10 grid grid-cols-4 gap-4 divide-x divide-white/10">
           {[
-            { value: "200+", label: "Workflows Automated"        },
-            { value: "60%",  label: "Avg. Cost Reduction"        },
-            { value: "0",    label: "Manual Errors Post-Launch"  },
-            { value: "30d",  label: "Post-Launch Warranty"       },
+            { value: "80+",  label: "APIs Integrated" },
+            { value: "99.97%", label: "Uptime Across Pipelines" },
+            { value: "12×",  label: "Faster Than Manual Sync" },
+            { value: "30d",  label: "Post-Launch Warranty" },
           ].map((s, i) => (
             <StatPill key={i} value={s.value} label={s.label} />
           ))}
         </div>
       </section>
 
-      {/* ─── USE CASES ──────────────────────────────────────────── */}
-      <section className="py-28 relative overflow-hidden">
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.03]"
-          style={{ backgroundImage: "radial-gradient(#07187b 1px,transparent 1px)", backgroundSize: "28px 28px" }}
-        />
-        <div className="max-w-7xl mx-auto px-10">
-          <UseCaseHeader />
-          <div className="grid grid-cols-3 gap-6 mt-16">
-            {useCases.map((u, i) => (
-              <UseCaseCard key={i} icon={u.icon} title={u.title} desc={u.desc} index={i} />
-            ))}
-          </div>
+      {/* ─── INTEGRATIONS MARQUEE ───────────────────────────────── */}
+      <section className="py-14 overflow-hidden" style={{ borderBottom: "1px solid rgba(7,24,123,0.07)" }}>
+        <p className="text-center text-xs font-bold tracking-[0.3em] uppercase mb-8" style={{ color: "#6571ab" }}>
+          Platforms We Integrate With
+        </p>
+        <div className="relative flex gap-6 overflow-hidden">
+          {/* duplicate for seamless loop */}
+          {[...integrations, ...integrations].map((name, i) => (
+            <div
+              key={i}
+              className="flex-shrink-0 px-6 py-3 rounded-full font-semibold text-sm whitespace-nowrap"
+              style={{
+                background: "rgba(7,24,123,0.05)",
+                border: "1px solid rgba(7,24,123,0.1)",
+                color: "#07187b",
+                animation: "marquee 22s linear infinite",
+              }}
+            >
+              {name}
+            </div>
+          ))}
         </div>
       </section>
 
       {/* ─── WHAT YOU GET ───────────────────────────────────────── */}
-      <section
-        className="py-28 relative overflow-hidden"
-        style={{ background: "linear-gradient(160deg,#f8faff 0%,#eef2ff 100%)" }}
-      >
+      <section className="py-28 relative overflow-hidden">
         <div
-          className="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle,rgba(148,181,0,0.15) 0%,transparent 70%)" }}
+          className="absolute inset-0 pointer-events-none opacity-[0.03]"
+          style={{ backgroundImage: "radial-gradient(#07187b 1px,transparent 1px)", backgroundSize: "28px 28px" }}
         />
         <div className="max-w-7xl mx-auto px-10 grid grid-cols-2 gap-20 items-center">
           <DeliverablesIntro />
@@ -724,10 +558,13 @@ export default function DigitisationPage() {
       </section>
 
       {/* ─── PROCESS ────────────────────────────────────────────── */}
-      <section className="py-28 relative overflow-hidden">
+      <section
+        className="py-28 relative overflow-hidden"
+        style={{ background: "linear-gradient(160deg,#f8faff 0%,#eef2ff 100%)" }}
+      >
         <div
-          className="absolute inset-0 pointer-events-none opacity-[0.03]"
-          style={{ backgroundImage: "radial-gradient(#07187b 1px,transparent 1px)", backgroundSize: "28px 28px" }}
+          className="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle,rgba(148,181,0,0.15) 0%,transparent 70%)" }}
         />
         <div className="max-w-7xl mx-auto px-10">
           <ProcessHeader />
@@ -740,13 +577,10 @@ export default function DigitisationPage() {
       </section>
 
       {/* ─── BENEFITS ───────────────────────────────────────────── */}
-      <section
-        className="py-28 relative overflow-hidden"
-        style={{ background: "linear-gradient(160deg,#f8faff 0%,#eef2ff 100%)" }}
-      >
+      <section className="py-28 relative overflow-hidden">
         <div
-          className="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle,rgba(148,181,0,0.15) 0%,transparent 70%)" }}
+          className="absolute inset-0 pointer-events-none opacity-[0.03]"
+          style={{ backgroundImage: "radial-gradient(#07187b 1px,transparent 1px)", backgroundSize: "28px 28px" }}
         />
         <div className="max-w-7xl mx-auto px-10">
           <BenefitsHeader />
@@ -765,13 +599,9 @@ export default function DigitisationPage() {
           0%, 100% { transform: translateY(0); }
           50%       { transform: translateY(-8px); }
         }
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to   { transform: rotate(360deg); }
-        }
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50%       { opacity: 0.4; }
+        @keyframes marquee {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
         }
       `}</style>
     </main>
