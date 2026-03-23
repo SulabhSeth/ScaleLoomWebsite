@@ -117,15 +117,15 @@ function StatPill({ value, label }: { value: string; label: string }) {
   return (
     <div
       ref={ref}
-      className="text-center px-8 py-6"
+      className="text-center px-4 py-6 sm:px-8"
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? "translateY(0)" : "translateY(20px)",
         transition: "opacity 0.6s ease, transform 0.6s ease",
       }}
     >
-      <p className="text-5xl font-black mb-1" style={{ color: "#94b500" }}>{value}</p>
-      <p className="text-sm font-medium tracking-wide" style={{ color: "rgba(255,255,255,0.65)" }}>{label}</p>
+      <p className="text-4xl sm:text-5xl font-black mb-1" style={{ color: "#94b500" }}>{value}</p>
+      <p className="text-xs sm:text-sm font-medium tracking-wide" style={{ color: "rgba(255,255,255,0.65)" }}>{label}</p>
     </div>
   );
 }
@@ -136,29 +136,29 @@ function CtaBanner() {
   return (
     <section
       ref={ref}
-      className="py-24 relative overflow-hidden"
+      className="py-16 sm:py-24 relative overflow-hidden"
       style={{ background: "linear-gradient(135deg,#07187b 0%,#0f2db8 100%)" }}
     >
       <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full opacity-20 pointer-events-none" style={{ background: "#94b500" }} />
       <div className="absolute -bottom-10 -right-10 w-48 h-48 rounded-full opacity-10 pointer-events-none" style={{ background: "#94b500" }} />
       <div
-        className="max-w-3xl mx-auto px-10 text-center"
+        className="max-w-3xl mx-auto px-6 sm:px-10 text-center"
         style={{
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? "translateY(0)" : "translateY(30px)",
           transition: "opacity 0.8s ease, transform 0.8s ease",
         }}
       >
-        <h2 className="text-5xl font-black text-white mb-6 leading-tight">
+        <h2 className="text-3xl sm:text-5xl font-black text-white mb-6 leading-tight">
           Ready to See Your<br />
           <span style={{ color: "#94b500" }}>Data Come Alive?</span>
         </h2>
-        <p className="text-base mb-10" style={{ color: "rgba(255,255,255,0.65)" }}>
+        <p className="text-sm sm:text-base mb-10" style={{ color: "rgba(255,255,255,0.65)" }}>
           Let's turn your scattered data into a single source of truth — in weeks, not months.
         </p>
         <Link
           href="/contact"
-          className="inline-block px-10 py-4 rounded-full font-bold text-sm text-white"
+          className="inline-block px-8 sm:px-10 py-4 rounded-full font-bold text-sm text-white"
           style={{ background: "#94b500", boxShadow: "0 8px 30px rgba(148,181,0,0.4)" }}
         >
           Contact Us →
@@ -213,7 +213,7 @@ export default function DataVisualizationPage() {
       <main className="min-h-screen bg-white overflow-x-hidden">
 
         {/* ─── HERO ─────────────────────────────────────────────── */}
-        <section className="relative pt-32 pb-28 overflow-hidden">
+        <section className="relative pt-24 sm:pt-32 pb-20 sm:pb-28 overflow-hidden">
 
           {/* background glow */}
           <div
@@ -225,7 +225,7 @@ export default function DataVisualizationPage() {
             style={{ background: "radial-gradient(circle,rgba(7,24,123,0.06) 0%,transparent 70%)" }}
           />
 
-          <div className="max-w-7xl mx-auto px-10 grid grid-cols-2 gap-20 items-center">
+          <div className="max-w-7xl mx-auto px-6 sm:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
             {/* LEFT */}
             <div>
@@ -245,7 +245,7 @@ export default function DataVisualizationPage() {
               </p>
 
               <h1
-                className="text-6xl font-black leading-[1.05] mb-6"
+                className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.05] mb-6"
                 style={{
                   color: "#07187b",
                   opacity: heroVisible ? 1 : 0,
@@ -301,19 +301,12 @@ export default function DataVisualizationPage() {
                 >
                   Start a Project
                 </Link>
-                {/* <Link
-                  href="/services"
-                  className="px-7 py-3 rounded-full font-semibold text-sm border-2"
-                  style={{ borderColor: "#07187b", color: "#07187b" }}
-                >
-                  All Services →
-                </Link> */}
               </div>
             </div>
 
             {/* RIGHT — decorative dashboard mockup */}
             <div
-              className="relative"
+              className="relative mt-8 lg:mt-0"
               style={{
                 opacity: heroVisible ? 1 : 0,
                 transform: heroVisible ? "none" : "translateX(40px)",
@@ -332,15 +325,15 @@ export default function DataVisualizationPage() {
                 style={{ background: "#07187b" }}
               >
                 {/* header bar */}
-                <div className="px-8 pt-8 pb-4 flex items-center justify-between">
+                <div className="px-5 sm:px-8 pt-6 sm:pt-8 pb-4 flex items-center justify-between">
                   <div>
                     <p className="text-xs font-bold tracking-widest uppercase mb-1" style={{ color: "rgba(255,255,255,0.45)" }}>
                       Weekly Overview
                     </p>
-                    <p className="text-2xl font-black text-white">Revenue Dashboard</p>
+                    <p className="text-lg sm:text-2xl font-black text-white">Revenue Dashboard</p>
                   </div>
                   <div
-                    className="px-4 py-1.5 rounded-full text-xs font-bold"
+                    className="px-3 sm:px-4 py-1.5 rounded-full text-xs font-bold"
                     style={{ background: "rgba(148,181,0,0.2)", color: "#94b500" }}
                   >
                     ● Live
@@ -348,7 +341,7 @@ export default function DataVisualizationPage() {
                 </div>
 
                 {/* stat row */}
-                <div className="px-8 py-4 grid grid-cols-3 gap-4">
+                <div className="px-5 sm:px-8 py-4 grid grid-cols-3 gap-2 sm:gap-4">
                   {[
                     { label: "Total Revenue", value: "$284K", delta: "+12%" },
                     { label: "Active Users",  value: "14.3K", delta: "+8%"  },
@@ -356,22 +349,22 @@ export default function DataVisualizationPage() {
                   ].map((s, i) => (
                     <div
                       key={i}
-                      className="rounded-2xl p-4"
+                      className="rounded-2xl p-3 sm:p-4"
                       style={{ background: "rgba(255,255,255,0.06)" }}
                     >
-                      <p className="text-xs mb-2" style={{ color: "rgba(255,255,255,0.45)" }}>{s.label}</p>
-                      <p className="text-xl font-black text-white mb-1">{s.value}</p>
+                      <p className="text-[10px] sm:text-xs mb-1 sm:mb-2" style={{ color: "rgba(255,255,255,0.45)" }}>{s.label}</p>
+                      <p className="text-base sm:text-xl font-black text-white mb-1">{s.value}</p>
                       <p className="text-xs font-semibold" style={{ color: "#94b500" }}>{s.delta} ↑</p>
                     </div>
                   ))}
                 </div>
 
                 {/* bar chart */}
-                <div className="px-8 pb-8 pt-2">
+                <div className="px-5 sm:px-8 pb-6 sm:pb-8 pt-2">
                   <p className="text-xs font-bold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.35)" }}>
                     7-Day Trend
                   </p>
-                  <div className="flex items-end gap-3 h-28">
+                  <div className="flex items-end gap-2 sm:gap-3 h-24 sm:h-28">
                     {bars.map((h, i) => (
                       <div key={i} className="flex-1 flex flex-col items-center gap-1">
                         <div
@@ -395,13 +388,13 @@ export default function DataVisualizationPage() {
 
               {/* floating badge */}
               <div
-                className="absolute -bottom-5 -left-8 rounded-2xl px-5 py-3.5 shadow-xl flex items-center gap-3"
+                className="absolute -bottom-5 left-4 sm:-left-8 rounded-2xl px-4 sm:px-5 py-3 sm:py-3.5 shadow-xl flex items-center gap-3"
                 style={{ background: "#fff", animation: "float 3s ease-in-out infinite" }}
               >
                 <span className="text-xl">📊</span>
                 <div>
                   <p className="text-xs" style={{ color: "#6571ab" }}>Avg. setup time</p>
-                  <p className="font-bold text-base" style={{ color: "#07187b" }}>Under 2 Weeks</p>
+                  <p className="font-bold text-sm sm:text-base" style={{ color: "#07187b" }}>Under 2 Weeks</p>
                 </div>
               </div>
             </div>
@@ -409,8 +402,8 @@ export default function DataVisualizationPage() {
         </section>
 
         {/* ─── STATS BAR ──────────────────────────────────────────── */}
-        <section className="py-14" style={{ background: "linear-gradient(90deg,#07187b 0%,#0d2299 100%)" }}>
-          <div className="max-w-7xl mx-auto px-10 grid grid-cols-4 gap-4 divide-x divide-white/10">
+        <section className="py-10 sm:py-14" style={{ background: "linear-gradient(90deg,#07187b 0%,#0d2299 100%)" }}>
+          <div className="max-w-7xl mx-auto px-6 sm:px-10 grid grid-cols-2 lg:grid-cols-4 gap-0 divide-y lg:divide-y-0 divide-x-0 lg:divide-x divide-white/10">
             {[
               { value: "10×",  label: "Faster Reporting Cycles" },
               { value: "98%",  label: "Dashboard Uptime SLA"   },
@@ -423,12 +416,12 @@ export default function DataVisualizationPage() {
         </section>
 
         {/* ─── WHAT YOU GET ───────────────────────────────────────── */}
-        <section className="py-28 relative overflow-hidden">
+        <section className="py-16 sm:py-28 relative overflow-hidden">
           <div
             className="absolute inset-0 pointer-events-none opacity-[0.03]"
             style={{ backgroundImage: "radial-gradient(#07187b 1px,transparent 1px)", backgroundSize: "28px 28px" }}
           />
-          <div className="max-w-7xl mx-auto px-10 grid grid-cols-2 gap-20 items-center">
+          <div className="max-w-7xl mx-auto px-6 sm:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
             {/* LEFT — text */}
             <div>
@@ -439,7 +432,7 @@ export default function DataVisualizationPage() {
                     <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>
                       What You Get
                     </p>
-                    <h2 className="text-5xl font-black mb-4 leading-tight" style={{ color: "#07187b" }}>
+                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4 leading-tight" style={{ color: "#07187b" }}>
                       Three Things<br />Delivered to You
                     </h2>
                     <div className="w-16 h-1 rounded-full mb-8" style={{ background: "#94b500" }} />
@@ -463,24 +456,24 @@ export default function DataVisualizationPage() {
 
         {/* ─── BENEFITS ───────────────────────────────────────────── */}
         <section
-          className="py-28 relative overflow-hidden"
+          className="py-16 sm:py-28 relative overflow-hidden"
           style={{ background: "linear-gradient(160deg,#f8faff 0%,#eef2ff 100%)" }}
         >
           <div
             className="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full pointer-events-none"
             style={{ background: "radial-gradient(circle,rgba(148,181,0,0.15) 0%,transparent 70%)" }}
           />
-          <div className="max-w-7xl mx-auto px-10">
-            <div className="mb-16">
+          <div className="max-w-7xl mx-auto px-6 sm:px-10">
+            <div className="mb-12 sm:mb-16">
               <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>
                 Business Impact
               </p>
-              <h2 className="text-5xl font-black leading-tight" style={{ color: "#07187b" }}>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight" style={{ color: "#07187b" }}>
                 Why It Changes<br />How You Operate
               </h2>
             </div>
 
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {benefits.map((b, i) => (
                 <BenefitCard key={i} icon={b.icon} title={b.title} description={b.description} index={i} />
               ))}
@@ -489,19 +482,19 @@ export default function DataVisualizationPage() {
         </section>
 
         {/* ─── HOW IT WORKS ───────────────────────────────────────── */}
-        <section className="py-28 relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-10">
+        <section className="py-16 sm:py-28 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6 sm:px-10">
             {(() => {
               const { ref, isVisible } = useInView(0.15);
               return (
-                <div ref={ref} className="text-center mb-16" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(24px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}>
+                <div ref={ref} className="text-center mb-12 sm:mb-16" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(24px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}>
                   <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>The Process</p>
-                  <h2 className="text-5xl font-black" style={{ color: "#07187b" }}>From Data to Dashboard</h2>
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black" style={{ color: "#07187b" }}>From Data to Dashboard</h2>
                 </div>
               );
             })()}
 
-            <div className="grid grid-cols-4 gap-8 relative">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 relative">
               {[
                 { icon: "🔍", title: "Audit",     desc: "We map every data source — databases, APIs, spreadsheets — and identify the metrics that actually matter." },
                 { icon: "🏗️", title: "Model",     desc: "We build a clean SQL layer with documented, version-controlled metrics all teams can trust." },
@@ -522,7 +515,7 @@ export default function DataVisualizationPage() {
                   >
                     {i < 3 && (
                       <div
-                        className="hidden md:block absolute top-6 h-px z-0"
+                        className="hidden lg:block absolute top-6 h-px z-0"
                         style={{
                           background: "linear-gradient(to right,#94b500,transparent)",
                           width: "calc(100% - 64px)",

@@ -112,15 +112,15 @@ function StatPill({ value, label }: { value: string; label: string }) {
   return (
     <div
       ref={ref}
-      className="text-center px-8 py-6"
+      className="text-center px-4 py-6 sm:px-8"
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? "translateY(0)" : "translateY(20px)",
         transition: "opacity 0.6s ease, transform 0.6s ease",
       }}
     >
-      <p className="text-5xl font-black mb-1" style={{ color: "#94b500" }}>{value}</p>
-      <p className="text-sm font-medium tracking-wide" style={{ color: "rgba(255,255,255,0.65)" }}>{label}</p>
+      <p className="text-4xl sm:text-5xl font-black mb-1" style={{ color: "#94b500" }}>{value}</p>
+      <p className="text-xs sm:text-sm font-medium tracking-wide" style={{ color: "rgba(255,255,255,0.65)" }}>{label}</p>
     </div>
   );
 }
@@ -130,29 +130,29 @@ function CtaBanner() {
   return (
     <section
       ref={ref}
-      className="py-24 relative overflow-hidden"
+      className="py-16 sm:py-24 relative overflow-hidden"
       style={{ background: "linear-gradient(135deg,#07187b 0%,#0f2db8 100%)" }}
     >
       <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full opacity-20 pointer-events-none" style={{ background: "#94b500" }} />
       <div className="absolute -bottom-10 -right-10 w-48 h-48 rounded-full opacity-10 pointer-events-none" style={{ background: "#94b500" }} />
       <div
-        className="max-w-3xl mx-auto px-10 text-center"
+        className="max-w-3xl mx-auto px-6 sm:px-10 text-center"
         style={{
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? "translateY(0)" : "translateY(30px)",
           transition: "opacity 0.8s ease, transform 0.8s ease",
         }}
       >
-        <h2 className="text-5xl font-black text-white mb-6 leading-tight">
+        <h2 className="text-3xl sm:text-5xl font-black text-white mb-6 leading-tight">
           Ready to Connect<br />
           <span style={{ color: "#94b500" }}>Your Entire Stack?</span>
         </h2>
-        <p className="text-base mb-10" style={{ color: "rgba(255,255,255,0.65)" }}>
+        <p className="text-sm sm:text-base mb-10" style={{ color: "rgba(255,255,255,0.65)" }}>
           Stop juggling disconnected tools. Let's wire everything together — cleanly, reliably, and once.
         </p>
         <Link
           href="/contact"
-          className="inline-block px-10 py-4 rounded-full font-bold text-sm text-white"
+          className="inline-block px-8 sm:px-10 py-4 rounded-full font-bold text-sm text-white"
           style={{ background: "#94b500", boxShadow: "0 8px 30px rgba(148,181,0,0.4)" }}
         >
           Connect with Us →
@@ -187,12 +187,12 @@ function ApiFlowMockup() {
       style={{ background: "#07187b", minHeight: 420 }}
     >
       {/* header */}
-      <div className="px-8 pt-7 pb-4 flex items-center justify-between" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+      <div className="px-5 sm:px-8 pt-6 sm:pt-7 pb-4 flex items-center justify-between" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
         <div>
           <p className="text-xs font-bold tracking-widest uppercase mb-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>Integration Hub</p>
-          <p className="text-xl font-black text-white">Live Data Flow</p>
+          <p className="text-lg sm:text-xl font-black text-white">Live Data Flow</p>
         </div>
-        <div className="px-4 py-1.5 rounded-full text-xs font-bold" style={{ background: "rgba(148,181,0,0.2)", color: "#94b500" }}>
+        <div className="px-3 sm:px-4 py-1.5 rounded-full text-xs font-bold" style={{ background: "rgba(148,181,0,0.2)", color: "#94b500" }}>
           ● Active
         </div>
       </div>
@@ -254,7 +254,7 @@ function ApiFlowMockup() {
       </div>
 
       {/* bottom log strip */}
-      <div className="mx-6 mb-6 rounded-xl px-4 py-3" style={{ background: "rgba(0,0,0,0.25)" }}>
+      <div className="mx-4 sm:mx-6 mb-5 sm:mb-6 rounded-xl px-3 sm:px-4 py-3" style={{ background: "rgba(0,0,0,0.25)" }}>
         <p className="text-[10px] font-mono" style={{ color: "#94b500" }}>
           ✓ POST /api/stripe/webhook → 200 OK &nbsp;·&nbsp; 42ms
         </p>
@@ -274,7 +274,7 @@ function DeliverablesIntro() {
   return (
     <div ref={ref} style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(24px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}>
       <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>What You Get</p>
-      <h2 className="text-5xl font-black mb-4 leading-tight" style={{ color: "#07187b" }}>
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4 leading-tight" style={{ color: "#07187b" }}>
         Five Things<br />Delivered to You
       </h2>
       <div className="w-16 h-1 rounded-full mb-8" style={{ background: "#94b500" }} />
@@ -289,9 +289,9 @@ function DeliverablesIntro() {
 function ProcessHeader() {
   const { ref, isVisible } = useInView(0.15);
   return (
-    <div ref={ref} className="text-center mb-16" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(24px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}>
+    <div ref={ref} className="text-center mb-12 sm:mb-16" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(24px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}>
       <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>The Process</p>
-      <h2 className="text-5xl font-black" style={{ color: "#07187b" }}>From Scattered Tools to One System</h2>
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black" style={{ color: "#07187b" }}>From Scattered Tools to One System</h2>
     </div>
   );
 }
@@ -301,7 +301,7 @@ function BenefitsHeader() {
   return (
     <div ref={ref} style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(24px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}>
       <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>Business Impact</p>
-      <h2 className="text-5xl font-black leading-tight" style={{ color: "#07187b" }}>
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight" style={{ color: "#07187b" }}>
         Why It Changes<br />How You Operate
       </h2>
     </div>
@@ -324,7 +324,7 @@ function ProcessStep({ step, icon, title, desc, index, total }: {
     >
       {index < total - 1 && (
         <div
-          className="hidden md:block absolute top-6 h-px z-0"
+          className="hidden lg:block absolute top-6 h-px z-0"
           style={{
             background: "linear-gradient(to right,#94b500,transparent)",
             width: "calc(100% - 48px)",
@@ -390,7 +390,7 @@ export default function ApiIntegrationPage() {
     <main className="min-h-screen bg-white overflow-x-hidden">
 
       {/* ─── HERO ─────────────────────────────────────────────── */}
-      <section className="relative pt-32 pb-28 overflow-hidden">
+      <section className="relative pt-24 sm:pt-32 pb-20 sm:pb-28 overflow-hidden">
         <div
           className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle,rgba(148,181,0,0.11) 0%,transparent 70%)" }}
@@ -400,7 +400,7 @@ export default function ApiIntegrationPage() {
           style={{ background: "radial-gradient(circle,rgba(7,24,123,0.06) 0%,transparent 70%)" }}
         />
 
-        <div className="max-w-7xl mx-auto px-10 grid grid-cols-2 gap-20 items-center">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* LEFT */}
           <div>
             <p
@@ -418,7 +418,7 @@ export default function ApiIntegrationPage() {
             </p>
 
             <h1
-              className="text-6xl font-black leading-[1.05] mb-6"
+              className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.05] mb-6"
               style={{
                 color: "#07187b",
                 opacity: heroVisible ? 1 : 0,
@@ -463,19 +463,12 @@ export default function ApiIntegrationPage() {
               >
                 Start a Project
               </Link>
-              {/* <Link
-                href="/services"
-                className="px-7 py-3 rounded-full font-semibold text-sm border-2"
-                style={{ borderColor: "#07187b", color: "#07187b" }}
-              >
-                All Services →
-              </Link> */}
             </div>
           </div>
 
           {/* RIGHT — API flow mockup */}
           <div
-            className="relative"
+            className="relative mt-8 lg:mt-0"
             style={{
               opacity: heroVisible ? 1 : 0,
               transform: heroVisible ? "none" : "translateX(40px)",
@@ -490,13 +483,13 @@ export default function ApiIntegrationPage() {
 
             {/* floating badge */}
             <div
-              className="absolute -bottom-5 -left-8 rounded-2xl px-5 py-3.5 shadow-xl flex items-center gap-3"
+              className="absolute -bottom-5 left-4 sm:-left-8 rounded-2xl px-4 sm:px-5 py-3 sm:py-3.5 shadow-xl flex items-center gap-3"
               style={{ background: "#fff", animation: "float 3s ease-in-out infinite" }}
             >
               <span className="text-xl">🔗</span>
               <div>
                 <p className="text-xs" style={{ color: "#6571ab" }}>Avg. integration time</p>
-                <p className="font-bold text-base" style={{ color: "#07187b" }}>1–2 Weeks</p>
+                <p className="font-bold text-sm sm:text-base" style={{ color: "#07187b" }}>1–2 Weeks</p>
               </div>
             </div>
           </div>
@@ -504,13 +497,13 @@ export default function ApiIntegrationPage() {
       </section>
 
       {/* ─── STATS BAR ──────────────────────────────────────────── */}
-      <section className="py-14" style={{ background: "linear-gradient(90deg,#07187b 0%,#0d2299 100%)" }}>
-        <div className="max-w-7xl mx-auto px-10 grid grid-cols-4 gap-4 divide-x divide-white/10">
+      <section className="py-10 sm:py-14" style={{ background: "linear-gradient(90deg,#07187b 0%,#0d2299 100%)" }}>
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 grid grid-cols-2 lg:grid-cols-4 gap-0 divide-y lg:divide-y-0 divide-x-0 lg:divide-x divide-white/10">
           {[
-            { value: "80+",  label: "APIs Integrated" },
+            { value: "80+",    label: "APIs Integrated" },
             { value: "99.97%", label: "Uptime Across Pipelines" },
-            { value: "12×",  label: "Faster Than Manual Sync" },
-            { value: "30d",  label: "Post-Launch Warranty" },
+            { value: "12×",    label: "Faster Than Manual Sync" },
+            { value: "30d",    label: "Post-Launch Warranty" },
           ].map((s, i) => (
             <StatPill key={i} value={s.value} label={s.label} />
           ))}
@@ -518,12 +511,11 @@ export default function ApiIntegrationPage() {
       </section>
 
       {/* ─── INTEGRATIONS MARQUEE ───────────────────────────────── */}
-      <section className="py-14 overflow-hidden" style={{ borderBottom: "1px solid rgba(7,24,123,0.07)" }}>
+      <section className="py-10 sm:py-14 overflow-hidden" style={{ borderBottom: "1px solid rgba(7,24,123,0.07)" }}>
         <p className="text-center text-xs font-bold tracking-[0.3em] uppercase mb-8" style={{ color: "#6571ab" }}>
           Platforms We Integrate With
         </p>
         <div className="relative flex gap-6 overflow-hidden">
-          {/* duplicate for seamless loop */}
           {[...integrations, ...integrations].map((name, i) => (
             <div
               key={i}
@@ -542,12 +534,12 @@ export default function ApiIntegrationPage() {
       </section>
 
       {/* ─── WHAT YOU GET ───────────────────────────────────────── */}
-      <section className="py-28 relative overflow-hidden">
+      <section className="py-16 sm:py-28 relative overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.03]"
           style={{ backgroundImage: "radial-gradient(#07187b 1px,transparent 1px)", backgroundSize: "28px 28px" }}
         />
-        <div className="max-w-7xl mx-auto px-10 grid grid-cols-2 gap-20 items-center">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <DeliverablesIntro />
           <div className="flex flex-col gap-4">
             {deliverables.map((d, i) => (
@@ -559,16 +551,17 @@ export default function ApiIntegrationPage() {
 
       {/* ─── PROCESS ────────────────────────────────────────────── */}
       <section
-        className="py-28 relative overflow-hidden"
+        className="py-16 sm:py-28 relative overflow-hidden"
         style={{ background: "linear-gradient(160deg,#f8faff 0%,#eef2ff 100%)" }}
       >
         <div
           className="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle,rgba(148,181,0,0.15) 0%,transparent 70%)" }}
         />
-        <div className="max-w-7xl mx-auto px-10">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10">
           <ProcessHeader />
-          <div className="grid grid-cols-5 gap-6 relative">
+          {/* 5-col on desktop → 2-col on sm → 1-col on mobile */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 relative">
             {processSteps.map((s, i) => (
               <ProcessStep key={i} step={i + 1} icon={s.icon} title={s.title} desc={s.desc} index={i} total={processSteps.length} />
             ))}
@@ -577,14 +570,15 @@ export default function ApiIntegrationPage() {
       </section>
 
       {/* ─── BENEFITS ───────────────────────────────────────────── */}
-      <section className="py-28 relative overflow-hidden">
+      <section className="py-16 sm:py-28 relative overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.03]"
           style={{ backgroundImage: "radial-gradient(#07187b 1px,transparent 1px)", backgroundSize: "28px 28px" }}
         />
-        <div className="max-w-7xl mx-auto px-10">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10">
           <BenefitsHeader />
-          <div className="grid grid-cols-2 gap-6 mt-16">
+          {/* 2-col on desktop → 1-col on mobile */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12 sm:mt-16">
             {benefits.map((b, i) => (
               <BenefitCard key={i} icon={b.icon} title={b.title} description={b.description} index={i} />
             ))}

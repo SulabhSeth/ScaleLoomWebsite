@@ -8,13 +8,13 @@ export default function ContactPage() {
 
       <section className="relative">
 
-        <div className="max-w-7xl mx-auto px-10 grid grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
 
           {/* LEFT CONTENT */}
           <div>
 
             {/* TITLE */}
-            <h1 className="text-5xl font-bold text-brandBlue leading-tight mb-8">
+            <h1 className="text-3xl md:text-5xl font-bold text-brandBlue leading-tight mb-8">
               Don't Hesitate <br /> To Contact Us
             </h1>
 
@@ -23,30 +23,30 @@ export default function ContactPage() {
 
               {/* WEBSITE */}
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-brandBlue text-white flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-brandBlue text-white flex items-center justify-center flex-shrink-0">
                   🌐
                 </div>
-                <p className="text-brandBlue font-medium">
+                <p className="text-brandBlue font-medium text-sm md:text-base">
                   www.scaleloomservices.com
                 </p>
               </div>
 
               {/* EMAIL */}
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-brandBlue text-white flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-brandBlue text-white flex items-center justify-center flex-shrink-0">
                   ✉️
                 </div>
-                <p className="text-brandBlue font-medium">
+                <p className="text-brandBlue font-medium text-sm md:text-base">
                   scaleloomservices@gmail.com
                 </p>
               </div>
 
               {/* PHONE */}
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-brandBlue text-white flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-brandBlue text-white flex items-center justify-center flex-shrink-0">
                   📞
                 </div>
-                <p className="text-brandBlue font-medium">
+                <p className="text-brandBlue font-medium text-sm md:text-base">
                   +91-9999630334 / +91-9873076300
                 </p>
               </div>
@@ -60,9 +60,9 @@ export default function ContactPage() {
           {/* RIGHT IMAGE */}
           <div className="relative">
 
-            <div className="relative h-[500px] w-full rounded-3xl overflow-hidden shadow-xl">
+            <div className="relative h-[300px] md:h-[500px] w-full rounded-3xl overflow-hidden shadow-xl">
               <Image
-                src="/logo3.png" // 👉 add your image in public folder
+                src="/logo3.png"
                 alt="Contact"
                 fill
                 className="object-cover"

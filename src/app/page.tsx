@@ -64,11 +64,11 @@ function Hero() {
   }, []);
 
   const services = [
-    { name: "Data Visualization & Analysis",  path: "/components/services/data-visualization",       icon: "📊" },
-    { name: "Digitisation & Automations",      path: "/components/services/digitisation-automation",  icon: "⚙️" },
-    { name: "Customised Point Solutions",      path: "/components/services/custom-solutions",         icon: "🛠️" },
-    { name: "API Integrations & Development",  path: "/components/services/api-integration",          icon: "🔗" },
-    { name: "Website & App Development",       path: "/components/services/web-development",          icon: "💻" },
+    { name: "Data Visualization & Analysis",  path: "/services/data-visualization",       icon: "📊" },
+    { name: "Digitisation & Automations",      path: "/services/digitisation-automation",  icon: "⚙️" },
+    { name: "Customised Point Solutions",      path: "/services/custom-solutions",         icon: "🛠️" },
+    { name: "API Integrations & Development",  path: "/services/api-integration",          icon: "🔗" },
+    { name: "Website & App Development",       path: "/services/web-development",          icon: "💻" },
   ];
 
   return (
@@ -114,7 +114,7 @@ function Hero() {
         style={{ background: "linear-gradient(to bottom,#94b500,#07187b,transparent)" }}
       />
 
-      <div className="max-w-7xl mx-auto px-10 w-full grid grid-cols-2 gap-20 items-center relative z-10 pt-24 pb-16">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center relative z-10 pt-24 pb-16">
 
         {/* ── LEFT: logo card ── */}
         <div
@@ -129,7 +129,7 @@ function Hero() {
             className="relative rounded-3xl p-1"
             style={{ background: "linear-gradient(135deg,#94b500 0%,#07187b 50%,#94b500 100%)" }}
           >
-            <div className="relative bg-white rounded-[22px] overflow-hidden" style={{ height: 460 }}>
+            <div className="relative bg-white rounded-[22px] overflow-hidden" style={{ height: 360 }}>
 
               {/* animated green shimmer top */}
               <div
@@ -154,9 +154,9 @@ function Hero() {
                   <Image
                     src="/logo.jpg"
                     alt="ScaleLoom Logo"
-                    width={260}
-                    height={260}
-                    className="object-contain relative z-10"
+                    width={200}
+                    height={200}
+                    className="object-contain relative z-10 sm:w-[260px] sm:h-[260px]"
                     style={{ borderRadius: 24 }}
                   />
                 </div>
@@ -164,7 +164,7 @@ function Hero() {
 
               {/* floating tag bottom-left */}
               <div
-                className="absolute bottom-6 left-6 rounded-xl px-4 py-2.5 flex items-center gap-2"
+                className="absolute bottom-5 left-5 rounded-xl px-3 py-2 flex items-center gap-2"
                 style={{
                   background: "#07187b",
                   animation: "float 3s ease-in-out infinite",
@@ -179,7 +179,7 @@ function Hero() {
 
               {/* floating tag bottom-right */}
               <div
-                className="absolute bottom-6 right-6 rounded-xl px-4 py-2.5 text-center"
+                className="absolute bottom-5 right-5 rounded-xl px-3 py-2 text-center"
                 style={{
                   background: "rgba(148,181,0,0.12)",
                   border: "1px solid rgba(148,181,0,0.3)",
@@ -194,7 +194,7 @@ function Hero() {
         </div>
 
         {/* ── RIGHT: copy ── */}
-        <div>
+        <div className="mt-4 lg:mt-0">
           {/* eyebrow */}
           <p
             className="text-xs font-bold tracking-[0.35em] uppercase mb-6"
@@ -212,7 +212,7 @@ function Hero() {
           <h1
             className="font-black leading-[1.02] mb-6"
             style={{
-              fontSize: "clamp(3rem,5vw,4.5rem)",
+              fontSize: "clamp(2.4rem,5vw,4.5rem)",
               color: "#07187b",
               opacity: visible ? 1 : 0,
               transform: visible ? "none" : "translateY(28px)",
@@ -221,7 +221,7 @@ function Hero() {
           >
             SCALE
             <span
-              className="relative inline-block mx-3 px-4 py-0"
+              className="relative inline-block mx-2 sm:mx-3 px-3 sm:px-4 py-0"
               style={{ background: "#07187b", color: "#94b500" }}
             >
               LOOM
@@ -262,7 +262,7 @@ function Hero() {
 
           {/* CTAs */}
           <div
-            className="flex gap-4 mb-12"
+            className="flex flex-wrap gap-4 mb-10"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? "none" : "translateY(16px)",
@@ -270,14 +270,14 @@ function Hero() {
             }}
           >
             <Link
-              href="/components/contact"
+              href="/contact"
               className="px-7 py-3.5 rounded-full font-bold text-sm text-white"
               style={{ background: "linear-gradient(135deg,#07187b,#94b500)", boxShadow: "0 8px 24px rgba(7,24,123,0.25)" }}
             >
               Start a Project
             </Link>
             <Link
-              href="/components/about"
+              href="/about"
               className="px-7 py-3.5 rounded-full font-bold text-sm border-2"
               style={{ borderColor: "#07187b", color: "#07187b" }}
             >
@@ -346,16 +346,16 @@ function VisionSection() {
   ];
 
   return (
-    <section className="py-28 relative overflow-hidden bg-white">
+    <section className="py-16 sm:py-28 relative overflow-hidden bg-white">
       <div
         className="absolute top-0 left-0 right-0 h-px pointer-events-none"
         style={{ background: "linear-gradient(to right,transparent,#94b500,transparent)" }}
       />
 
-      <div className="max-w-7xl mx-auto px-10">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10">
         <div
           ref={ref}
-          className="grid grid-cols-2 gap-20 items-center"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center"
         >
           {/* LEFT */}
           <div
@@ -368,7 +368,7 @@ function VisionSection() {
             <p className="text-xs font-bold tracking-[0.35em] uppercase mb-4" style={{ color: "#94b500" }}>
               Our Vision
             </p>
-            <h2 className="text-5xl font-black leading-tight mb-6" style={{ color: "#07187b" }}>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight mb-6" style={{ color: "#07187b" }}>
               Technology That<br />
               <span style={{ WebkitTextStroke: "2px #94b500", color: "transparent" }}>Fits</span>
               {" "}<span style={{ color: "#94b500" }}>Your Ambition.</span>
@@ -421,7 +421,6 @@ function PillarCard({ icon, label, desc, index }: { icon: string; label: string;
         <h3 className="text-lg font-black mb-1" style={{ color: "#07187b" }}>{label}</h3>
         <p className="text-sm leading-relaxed" style={{ color: "#6571ab" }}>{desc}</p>
       </div>
-      {/* right arrow reveal on hover */}
       <div
         className="ml-auto self-center text-lg opacity-0 group-hover:opacity-100 transition-all duration-300"
         style={{ color: "#94b500", transform: "translateX(-8px)" }}
@@ -446,7 +445,7 @@ function ServicesSection() {
 
   return (
     <section
-      className="py-28 relative overflow-hidden"
+      className="py-16 sm:py-28 relative overflow-hidden"
       style={{ background: "linear-gradient(160deg,#f8faff 0%,#eef2ff 100%)" }}
     >
       <div
@@ -454,21 +453,29 @@ function ServicesSection() {
         style={{ background: "radial-gradient(circle,rgba(148,181,0,0.12) 0%,transparent 70%)" }}
       />
 
-      <div className="max-w-7xl mx-auto px-10">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10">
         <ServicesHeader />
 
-        <div className="grid grid-cols-3 gap-6 mt-16">
-          {services.slice(0, 3).map((s, i) => (
-            <ServiceCard key={i} {...s} index={i} />
-          ))}
+        {/* On mobile/tablet: single column. On lg: first 3 in a row, last 2 centered */}
+        <div className="mt-12 sm:mt-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.slice(0, 3).map((s, i) => (
+              <ServiceCard key={i} {...s} index={i} />
+            ))}
+            {/* Last 2 — shown inline on mobile, centred on lg */}
+            <div className="contents lg:hidden">
+              {services.slice(3).map((s, i) => (
+                <ServiceCard key={i + 3} {...s} index={i + 3} />
+              ))}
+            </div>
+          </div>
+          {/* Last 2 centered row — desktop only */}
+          <div className="hidden lg:grid grid-cols-2 gap-6 mt-6 max-w-2xl mx-auto">
+            {services.slice(3).map((s, i) => (
+              <ServiceCard key={i + 3} {...s} index={i + 3} />
+            ))}
+          </div>
         </div>
-        <div className="grid grid-cols-2 gap-6 mt-6 max-w-2xl mx-auto">
-          {services.slice(3).map((s, i) => (
-            <ServiceCard key={i + 3} {...s} index={i + 3} />
-          ))}
-        </div>
-
-        {/* <ViewAllServices /> */}
       </div>
     </section>
   );
@@ -479,11 +486,11 @@ function ServicesHeader() {
   return (
     <div ref={ref} style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(24px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}>
       <p className="text-xs font-bold tracking-[0.35em] uppercase mb-4" style={{ color: "#94b500" }}>What We Do</p>
-      <div className="flex items-end justify-between">
-        <h2 className="text-5xl font-black leading-tight" style={{ color: "#07187b" }}>
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight" style={{ color: "#07187b" }}>
           Five Services,<br />One Cohesive Partner.
         </h2>
-        <p className="text-sm max-w-xs text-right hidden md:block" style={{ color: "#6571ab" }}>
+        <p className="text-sm max-w-xs sm:text-right" style={{ color: "#6571ab" }}>
           Every service is designed to plug into the others — so your stack grows as a system, not a patchwork.
         </p>
       </div>
@@ -544,27 +551,8 @@ function ServiceCard({ icon, title, sub, path, accent, index }: {
   );
 }
 
-// function ViewAllServices() {
-//   const { ref, isVisible } = useInView(0.2);
-//   return (
-//     <div ref={ref} className="text-center mt-14" style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}>
-//       <Link
-//         href="/services"
-//         className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm border-2 transition-all duration-300 hover:shadow-lg"
-//         style={{ borderColor: "#07187b", color: "#07187b" }}
-//       >
-//         View All Services
-//         <span style={{ color: "#94b500" }}>→</span>
-//       </Link>
-//     </div>
-//   );
-// }
-
 /* ═══════════════════════════════════════════════════════════
    STATS / WHY US
-═══════════════════════════════════════════════════════════ */
-/* ═══════════════════════════════════════════════════════════
-   STATS / WHY US  — drop this in place of the old WhyUsSection
 ═══════════════════════════════════════════════════════════ */
 function MilestoneItem({ value, text, index }: { value: string; text: string; index: number }) {
   const { ref, isVisible } = useInView(0.15);
@@ -581,16 +569,16 @@ function MilestoneItem({ value, text, index }: { value: string; text: string; in
     >
       {/* CIRCLE */}
       <div
-        className="w-24 h-24 rounded-full flex items-center justify-center text-white font-bold text-2xl flex-shrink-0 shadow-lg"
+        className="w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center text-white font-bold text-xl sm:text-2xl flex-shrink-0 shadow-lg"
         style={{ background: "#07187b" }}
       >
         {value}
       </div>
       {/* CONNECTOR */}
-      <div className="h-1 w-6 flex-shrink-0" style={{ background: "#07187b" }} />
+      <div className="h-1 w-4 sm:w-6 flex-shrink-0" style={{ background: "#07187b" }} />
       {/* PILL */}
       <div
-        className="text-white px-6 py-4 rounded-full text-sm leading-relaxed shadow-md"
+        className="text-white px-4 sm:px-6 py-3 sm:py-4 rounded-full text-xs sm:text-sm leading-relaxed shadow-md"
         style={{ background: "#07187b" }}
       >
         {text}
@@ -607,7 +595,7 @@ function WhyUsSection() {
   ];
 
   return (
-    <section className="py-28 relative overflow-hidden bg-white">
+    <section className="py-16 sm:py-28 relative overflow-hidden bg-white">
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.03]"
         style={{ backgroundImage: "radial-gradient(#07187b 1px,transparent 1px)", backgroundSize: "28px 28px" }}
@@ -616,11 +604,11 @@ function WhyUsSection() {
         className="absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full pointer-events-none"
         style={{ background: "radial-gradient(circle,rgba(148,181,0,0.1) 0%,transparent 70%)" }}
       />
-      <div className="max-w-7xl mx-auto px-10">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10">
 
-        {/* stats bar — unchanged */}
+        {/* stats bar */}
         <div
-          className="rounded-3xl mb-20 py-10 px-6 grid grid-cols-4 gap-4"
+          className="rounded-3xl mb-12 sm:mb-20 py-8 sm:py-10 px-4 sm:px-6 grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-4"
           style={{ background: "linear-gradient(90deg,#07187b 0%,#0d2299 100%)" }}
         >
           {[
@@ -629,19 +617,19 @@ function WhyUsSection() {
             { value: 60,  suffix: "%", label: "Avg. Cost Reduction"     },
             { value: 8,   suffix: "×", label: "Avg. ROI Delivered"      },
           ].map((s, i) => (
-            <div key={i} className="text-center px-4">
-              <p className="text-5xl font-black mb-1" style={{ color: "#94b500" }}>
+            <div key={i} className="text-center px-2 sm:px-4">
+              <p className="text-4xl sm:text-5xl font-black mb-1" style={{ color: "#94b500" }}>
                 <Counter value={s.value} suffix={s.suffix} />
               </p>
-              <p className="text-sm font-medium tracking-wide" style={{ color: "rgba(255,255,255,0.6)" }}>{s.label}</p>
+              <p className="text-xs sm:text-sm font-medium tracking-wide" style={{ color: "rgba(255,255,255,0.6)" }}>{s.label}</p>
             </div>
           ))}
         </div>
 
         {/* two-column: left copy, right milestones */}
-        <div className="grid grid-cols-2 gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <WhyUsLeft />
-          <div className="space-y-10">
+          <div className="space-y-6 sm:space-y-10">
             {milestones.map((m, i) => (
               <MilestoneItem key={i} value={m.value} text={m.text} index={i} />
             ))}
@@ -659,7 +647,7 @@ function WhyUsLeft() {
   return (
     <div ref={ref} style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(24px)", transition: "opacity 0.7s ease, transform 0.7s ease" }}>
       <p className="text-xs font-bold tracking-[0.35em] uppercase mb-4" style={{ color: "#94b500" }}>Why Choose Us</p>
-      <h2 className="text-5xl font-black leading-tight mb-6" style={{ color: "#07187b" }}>
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight mb-6" style={{ color: "#07187b" }}>
         50+ Years Combined<br />
         <span style={{ color: "#94b500" }}>Experience. One Team.</span>
       </h2>
@@ -681,16 +669,16 @@ function WhyUsCta() {
   return (
     <div
       ref={ref}
-      className="mt-16 text-center"
+      className="mt-12 sm:mt-16 text-center"
       style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "none" : "translateY(16px)", transition: "opacity 0.6s ease, transform 0.6s ease" }}
     >
-      <Link
-        href="/components/about"
+      {/* <Link
+        href="/about"
         className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm text-white"
         style={{ background: "linear-gradient(135deg,#07187b,#94b500)", boxShadow: "0 8px 24px rgba(7,24,123,0.2)" }}
       >
         See the Full Story →
-      </Link>
+      </Link> */}
     </div>
   );
 }
@@ -702,12 +690,11 @@ function CtaBanner() {
   const { ref, isVisible } = useInView(0.2);
   return (
     <section
-      className="py-28 relative overflow-hidden"
+      className="py-16 sm:py-28 relative overflow-hidden"
       style={{ background: "linear-gradient(135deg,#07187b 0%,#0f2db8 100%)" }}
     >
       <div className="absolute -top-24 -left-24 w-72 h-72 rounded-full opacity-20 pointer-events-none" style={{ background: "#94b500" }} />
       <div className="absolute -bottom-12 -right-12 w-56 h-56 rounded-full opacity-10 pointer-events-none" style={{ background: "#94b500" }} />
-      {/* diagonal stripe */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.04]"
         style={{
@@ -718,7 +705,7 @@ function CtaBanner() {
 
       <div
         ref={ref}
-        className="max-w-3xl mx-auto px-10 text-center"
+        className="max-w-3xl mx-auto px-6 sm:px-10 text-center"
         style={{
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? "translateY(0)" : "translateY(30px)",
@@ -728,29 +715,22 @@ function CtaBanner() {
         <p className="text-xs font-bold tracking-[0.35em] uppercase mb-6" style={{ color: "rgba(148,181,0,0.8)" }}>
           Let's Build Together
         </p>
-        <h2 className="text-5xl font-black text-white mb-6 leading-tight">
+        <h2 className="text-3xl sm:text-5xl font-black text-white mb-6 leading-tight">
           Transform Your Ideas<br />
           <span style={{ color: "#94b500" }}>Into Scalable Products.</span>
         </h2>
-        <p className="text-base mb-12 max-w-xl mx-auto" style={{ color: "rgba(255,255,255,0.6)" }}>
+        <p className="text-sm sm:text-base mb-10 sm:mb-12 max-w-xl mx-auto" style={{ color: "rgba(255,255,255,0.6)" }}>
           Partner with us to drive real business growth. No fluff, no delays —
           just systems that perform as loudly as your ambitions demand.
         </p>
-        <div className="flex gap-4 justify-center">
+        <div className="flex flex-wrap gap-4 justify-center">
           <Link
-            href="/components/contact"
-            className="px-10 py-4 rounded-full font-bold text-sm text-white"
+            href="/contact"
+            className="px-8 sm:px-10 py-4 rounded-full font-bold text-sm text-white"
             style={{ background: "#94b500", boxShadow: "0 8px 30px rgba(148,181,0,0.45)" }}
           >
             Get Started Today →
           </Link>
-          {/* <Link
-            href="/services"
-            className="px-10 py-4 rounded-full font-bold text-sm border-2"
-            style={{ borderColor: "rgba(255,255,255,0.3)", color: "#fff" }}
-          >
-            View Services
-          </Link> */}
         </div>
       </div>
     </section>

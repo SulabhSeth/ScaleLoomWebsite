@@ -71,7 +71,7 @@ function ProcessStep({ step, title, desc, index }: {
     >
       {index < 2 && (
         <div
-          className="hidden md:block absolute top-6 h-px z-0"
+          className="hidden lg:block absolute top-6 h-px z-0"
           style={{
             background: "linear-gradient(to right,#94b500 0%,transparent 100%)",
             width: "calc(100% - 64px)",
@@ -108,33 +108,35 @@ function CtaBanner() {
   return (
     <section
       ref={ref}
-      className="py-24 relative overflow-hidden"
+      className="py-16 sm:py-24 relative overflow-hidden"
       style={{ background: "linear-gradient(135deg,#07187b 0%,#0f2db8 100%)" }}
     >
       <div className="absolute -top-20 -left-20 w-64 h-64 rounded-full opacity-20 pointer-events-none" style={{ background: "#94b500" }} />
       <div className="absolute -bottom-10 -right-10 w-48 h-48 rounded-full opacity-10 pointer-events-none" style={{ background: "#94b500" }} />
 
       <div
-        className="max-w-3xl mx-auto px-10 text-center"
+        className="max-w-3xl mx-auto px-6 sm:px-10 text-center"
         style={{
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? "translateY(0)" : "translateY(30px)",
           transition: "opacity 0.8s ease, transform 0.8s ease",
         }}
       >
-        <h2 className="text-5xl font-black text-white mb-6 leading-tight">
+        <h2 className="text-3xl sm:text-5xl font-black text-white mb-6 leading-tight">
           Ready to Scale<br />
           <span style={{ color: "#94b500" }}>Your Vision?</span>
         </h2>
-        <p className="text-base mb-10" style={{ color: "rgba(255,255,255,0.65)" }}>
+        <p className="text-sm sm:text-base mb-10" style={{ color: "rgba(255,255,255,0.65)" }}>
           Let's build something extraordinary together. No fluff, no delays — just results.
         </p>
-        <button
-          className="px-10 py-4 rounded-full font-bold text-sm"
+        
+        <Link
+          href="/contact"
+          className="px-8 sm:px-10 py-4 rounded-full font-bold text-sm"
           style={{ background: "#94b500", color: "#fff", boxShadow: "0 8px 30px rgba(148,181,0,0.4)" }}
         >
           Get Started today →
-        </button>
+        </Link>
       </div>
     </section>
   );
@@ -188,13 +190,13 @@ export default function AboutPage() {
       <main className="min-h-screen bg-white overflow-x-hidden">
 
         {/* ─── HERO ─────────────────────────────────────────────────*/}
-        <section className="relative pt-32 pb-24 overflow-hidden">
+        <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-24 overflow-hidden">
           <div
             className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full pointer-events-none"
             style={{ background: "radial-gradient(circle,rgba(148,181,0,0.12) 0%,transparent 70%)" }}
           />
 
-          <div ref={heroRef} className="max-w-7xl mx-auto px-10 grid grid-cols-2 gap-20 items-center">
+          <div ref={heroRef} className="max-w-7xl mx-auto px-6 sm:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
             {/* LEFT */}
             <div>
@@ -211,7 +213,7 @@ export default function AboutPage() {
               </p>
 
               <h1
-                className="text-6xl font-black leading-[1.05] mb-8"
+                className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.05] mb-8"
                 style={{
                   color: "#07187b",
                   opacity: heroVisible ? 1 : 0,
@@ -240,33 +242,11 @@ export default function AboutPage() {
                 deep-tier IT expertise with high-level brand strategy. We don't just build
                 your tools — we engineer your competitive advantage."
               </p>
-
-              <div
-                className="mt-10 flex gap-4 items-center"
-                style={{
-                  opacity: heroVisible ? 1 : 0,
-                  transform: heroVisible ? "none" : "translateY(16px)",
-                  transition: "opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s",
-                }}
-              >
-                {/* <button
-                  className="px-7 py-3 rounded-full font-semibold text-sm text-white"
-                  style={{ background: "linear-gradient(135deg,#07187b,#94b500)" }}
-                >
-                  Start a Project
-                </button> */}
-                {/* <button
-                  className="px-7 py-3 rounded-full font-semibold text-sm border-2"
-                  style={{ borderColor: "#07187b", color: "#07187b" }}
-                >
-                  See Our Work →
-                </button> */}
-              </div>
             </div>
 
             {/* RIGHT */}
             <div
-              className="relative"
+              className="relative mt-8 lg:mt-0"
               style={{
                 opacity: heroVisible ? 1 : 0,
                 transform: heroVisible ? "none" : "translateX(40px)",
@@ -277,7 +257,7 @@ export default function AboutPage() {
                 className="absolute -top-6 -right-6 w-64 h-64 rounded-full pointer-events-none"
                 style={{ background: "radial-gradient(circle,rgba(148,181,0,0.35) 0%,transparent 70%)" }}
               />
-              <div className="relative h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative h-72 sm:h-[400px] lg:h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl">
                 <Image src="/office.jpg" alt="Team working" fill className="object-cover" />
                 <div
                   className="absolute inset-0"
@@ -286,13 +266,13 @@ export default function AboutPage() {
               </div>
 
               <div
-                className="absolute -bottom-6 -left-8 rounded-2xl px-6 py-4 shadow-xl flex items-center gap-3"
+                className="absolute -bottom-6 left-4 sm:-left-8 rounded-2xl px-5 sm:px-6 py-3 sm:py-4 shadow-xl flex items-center gap-3"
                 style={{ background: "#07187b", color: "#fff", animation: "float 3s ease-in-out infinite" }}
               >
-                <span className="text-2xl">🚀</span>
+                <span className="text-xl sm:text-2xl">🚀</span>
                 <div>
                   <p className="text-xs opacity-70">Avg. delivery time</p>
-                  <p className="font-bold text-lg" style={{ color: "#94b500" }}>2–4 Weeks</p>
+                  <p className="font-bold text-base sm:text-lg" style={{ color: "#94b500" }}>2–4 Weeks</p>
                 </div>
               </div>
             </div>
@@ -300,14 +280,14 @@ export default function AboutPage() {
         </section>
 
         {/* ─── STATS BAR ──────────────────────────────────────────── */}
-        <section className="py-14" style={{ background: "linear-gradient(90deg,#07187b 0%,#0d2299 100%)" }}>
-          <div className="max-w-7xl mx-auto px-10 grid grid-cols-4 gap-8">
+        <section className="py-10 sm:py-14" style={{ background: "linear-gradient(90deg,#07187b 0%,#0d2299 100%)" }}>
+          <div className="max-w-7xl mx-auto px-6 sm:px-10 grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {stats.map((s, i) => (
               <div key={i} className="text-center">
-                <p className="text-5xl font-black mb-1" style={{ color: "#94b500" }}>
+                <p className="text-4xl sm:text-5xl font-black mb-1" style={{ color: "#94b500" }}>
                   <Counter value={s.value} suffix={s.suffix} />
                 </p>
-                <p className="text-sm font-medium tracking-wide" style={{ color: "rgba(255,255,255,0.65)" }}>
+                <p className="text-xs sm:text-sm font-medium tracking-wide" style={{ color: "rgba(255,255,255,0.65)" }}>
                   {s.label}
                 </p>
               </div>
@@ -316,19 +296,19 @@ export default function AboutPage() {
         </section>
 
         {/* ─── PROCESS ────────────────────────────────────────────── */}
-        <section className="py-28 relative overflow-hidden">
+        <section className="py-16 sm:py-28 relative overflow-hidden">
           <div
             className="absolute inset-0 pointer-events-none opacity-[0.03]"
             style={{ backgroundImage: "radial-gradient(#07187b 1px,transparent 1px)", backgroundSize: "28px 28px" }}
           />
-          <div className="max-w-7xl mx-auto px-10">
-            <div className="text-center mb-16">
+          <div className="max-w-7xl mx-auto px-6 sm:px-10">
+            <div className="text-center mb-12 sm:mb-16">
               <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>
                 Our Process
               </p>
-              <h2 className="text-5xl font-black" style={{ color: "#07187b" }}>Three Steps to Scale</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black" style={{ color: "#07187b" }}>Three Steps to Scale</h2>
             </div>
-            <div className="grid grid-cols-3 gap-10 relative">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 relative">
               {steps.map((s, i) => (
                 <ProcessStep key={i} step={i + 1} index={i} title={s.title} desc={s.desc} />
               ))}
@@ -338,24 +318,24 @@ export default function AboutPage() {
 
         {/* ─── WHY US CARDS ───────────────────────────────────────── */}
         <section
-          className="py-28 relative overflow-hidden"
+          className="py-16 sm:py-28 relative overflow-hidden"
           style={{ background: "linear-gradient(160deg,#f8faff 0%,#eef2ff 100%)" }}
         >
           <div
             className="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full pointer-events-none"
             style={{ background: "radial-gradient(circle,rgba(148,181,0,0.15) 0%,transparent 70%)" }}
           />
-          <div className="max-w-7xl mx-auto px-10">
-            <div className="mb-16">
+          <div className="max-w-7xl mx-auto px-6 sm:px-10">
+            <div className="mb-12 sm:mb-16">
               <p className="text-xs font-bold tracking-[0.3em] uppercase mb-4" style={{ color: "#94b500" }}>
                 Our Advantage
               </p>
-              <h2 className="text-5xl font-black" style={{ color: "#07187b" }}>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black" style={{ color: "#07187b" }}>
                 Why Teams<br />Choose Us
               </h2>
             </div>
 
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {reasons.map((r, i) => {
                 const { ref, isVisible } = useInViewCard(i);
                 return (
