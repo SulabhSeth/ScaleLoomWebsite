@@ -57,8 +57,8 @@ function DeliverableItem({ text, sub, index }: { text: string; sub: string; inde
   );
 }
 
-function BenefitCard({ icon, title, description, index }: {
-  icon: string; title: string; description: string; index: number;
+function BenefitCard({ title, description, index }: {
+  title: string; description: string; index: number;
 }) {
   const { ref, isVisible } = useInView(0.15);
   return (
@@ -93,12 +93,12 @@ function BenefitCard({ icon, title, description, index }: {
       onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.transform = "scaleY(0)")}
     />
     <div className="relative z-10">
-      <div
+      {/* <div
        className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl mb-5"
        style={{ background: "rgba(148,181,0,0.12)" }}
       >
        {icon}
-      </div>
+      </div> */}
       <h3 className="text-lg font-bold mb-2" style={{ color: "#07187b" }}>{title}</h3>
       <p className="text-sm leading-relaxed" style={{ color: "#6571ab" }}>{description}</p>
     </div>
@@ -399,22 +399,22 @@ export default function CustomSolutionsPage() {
 
   const benefits = [
    {
-    icon: "🎯",
+    icon: "",
     title: "Fits Like a Glove",
     description: "Off-the-shelf tools make you adapt your workflow to their limitations. Custom solutions are shaped around how your team actually works — no compromises.",
    },
    {
-    icon: "📉",
+    icon: "",
     title: "Kills Hidden Costs",
     description: "Stitching together SaaS tools adds up fast. A single purpose-built solution often costs less than 12 months of the subscriptions it replaces.",
    },
    {
-    icon: "🔐",
+    icon: "",
     title: "Your Data, Your Rules",
     description: "Full control over where data lives and how it flows. Critical for regulated industries, privacy-conscious teams, or businesses with complex compliance needs.",
    },
    {
-    icon: "⚡",
+    icon: "",
     title: "Competitive Moat",
     description: "A tool built around your exact process is one your competitors can't buy off the shelf. It becomes a genuine operational advantage.",
    },
@@ -422,39 +422,39 @@ export default function CustomSolutionsPage() {
 
   const processSteps = [
    {
-    icon: "🔍",
+    icon: "",
     title: "Discovery Workshop",
     desc: "We map your current workflow, pain points, and success metrics in a structured session — leaving with a shared understanding of the problem.",
    },
    {
-    icon: "📐",
+    icon: "",
     title: "Solution Architecture",
     desc: "We design the technical blueprint — stack, data model, integrations, and phasing — and present it for sign-off before any build begins.",
    },
    {
-    icon: "⚙️",
+    icon: "",
     title: "Iterative Build",
     desc: "Two-week sprints with live demos each cycle. You steer. We build. Nothing ships that hasn't been reviewed and approved.",
    },
    {
-    icon: "🧪",
+    icon: "",
     title: "Test & Harden",
     desc: "Automated tests, UAT sessions, and a staging environment that mirrors production — so go-live is boring, not stressful.",
    },
    {
-    icon: "🚀",
+    icon: "",
     title: "Launch & Hand Over",
     desc: "Production deployment, team onboarding, full docs, and 30 days of dedicated post-launch support included in every engagement.",
    },
   ];
 
   const useCaseExamples = [
-   { icon: "🛠️", title: "Internal Operations Tool",    desc: "Replace spreadsheets and tribal knowledge with a purpose-built ops platform your whole team can use." },
-   { icon: "🔐", title: "Customer / Client Portal",     desc: "Give your clients a branded, self-serve experience — orders, status, files, comms — all in one place." },
-   { icon: "🤖", title: "AI-Powered Feature",           desc: "Embed LLMs, vision models, or recommendation engines directly into your product or workflow." },
-   { icon: "🔄", title: "Workflow Automation Engine",   desc: "Replace manual, multi-step processes with rules-driven automation that runs 24/7 without intervention." },
-   { icon: "📊", title: "Reporting & Analytics Layer",  desc: "Custom metrics, drill-downs, and exports built around your KPIs — not a generic BI tool's defaults." },
-   { icon: "🔗", title: "Legacy System Modernisation",  desc: "Wrap or replace ageing systems with modern APIs and interfaces, without a risky full rewrite." },
+   { icon: "", title: "Internal Operations Tool",    desc: "Replace spreadsheets and tribal knowledge with a purpose-built ops platform your whole team can use." },
+   { icon: "", title: "Customer / Client Portal",     desc: "Give your clients a branded, self-serve experience — orders, status, files, comms — all in one place." },
+   { icon: "", title: "AI-Powered Feature",           desc: "Embed LLMs, vision models, or recommendation engines directly into your product or workflow." },
+   { icon: "", title: "Workflow Automation Engine",   desc: "Replace manual, multi-step processes with rules-driven automation that runs 24/7 without intervention." },
+   { icon: "", title: "Reporting & Analytics Layer",  desc: "Custom metrics, drill-downs, and exports built around your KPIs — not a generic BI tool's defaults." },
+   { icon: "", title: "Legacy System Modernisation",  desc: "Wrap or replace ageing systems with modern APIs and interfaces, without a risky full rewrite." },
   ];
 
   return (
@@ -593,7 +593,7 @@ export default function CustomSolutionsPage() {
        <UseCaseHeader />
        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 sm:mt-16">
         {useCaseExamples.map((u, i) => (
-          <UseCaseCard key={i} icon={u.icon} title={u.title} desc={u.desc} index={i} />
+          <UseCaseCard key={i} title={u.title} desc={u.desc} index={i} />
         ))}
        </div>
       </div>
@@ -647,7 +647,7 @@ export default function CustomSolutionsPage() {
        <BenefitsHeader />
        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-12 sm:mt-16">
         {benefits.map((b, i) => (
-          <BenefitCard key={i} icon={b.icon} title={b.title} description={b.description} index={i} />
+          <BenefitCard key={i} title={b.title} description={b.description} index={i} />
         ))}
        </div>
       </div>
@@ -674,8 +674,8 @@ export default function CustomSolutionsPage() {
 }
 
 /* ── Use-case card with own hook ── */
-function UseCaseCard({ icon, title, desc, index }: {
-  icon: string; title: string; desc: string; index: number;
+function UseCaseCard({ title, desc, index }: {
+  title: string; desc: string; index: number;
 }) {
   const { ref, isVisible } = useInView(0.15);
   return (
@@ -699,12 +699,12 @@ function UseCaseCard({ icon, title, desc, index }: {
       }}
     />
     <div className="relative z-10">
-      <div
+      {/* <div
        className="w-11 h-11 rounded-2xl flex items-center justify-center text-xl mb-4"
        style={{ background: "rgba(148,181,0,0.12)" }}
       >
        {icon}
-      </div>
+      </div> */}
       <div className="w-6 h-[3px] mb-3 rounded-full" style={{ background: "#94b500" }} />
       <h3 className="text-base font-bold mb-2" style={{ color: "#07187b" }}>{title}</h3>
       <p className="text-sm leading-relaxed" style={{ color: "#6571ab" }}>{desc}</p>

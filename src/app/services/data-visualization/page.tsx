@@ -60,8 +60,8 @@ function DeliverableItem({ text, index }: { text: string; index: number }) {
 }
 
 /* Benefit card */
-function BenefitCard({ icon, title, description, index }: {
-  icon: string; title: string; description: string; index: number;
+function BenefitCard({ title, description, index }: {
+  title: string; description: string; index: number;
 }) {
   const { ref, isVisible } = useInView(0.15);
   return (
@@ -98,12 +98,12 @@ function BenefitCard({ icon, title, description, index }: {
         onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.transform = "scaleY(0)")}
       />
       <div className="relative z-10">
-        <div
+        {/* <div
           className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl mb-5"
           style={{ background: "rgba(148,181,0,0.12)" }}
-        >
-          {icon}
-        </div>
+        > */}
+          {/* {icon} */}
+        {/* </div> */}
         <h3 className="text-lg font-bold mb-2" style={{ color: "#07187b" }}>{title}</h3>
         <p className="text-sm leading-relaxed" style={{ color: "#6571ab" }}>{description}</p>
       </div>
@@ -187,17 +187,17 @@ export default function DataVisualizationPage() {
 
   const benefits = [
     {
-      icon: "📉",
+      icon: "",
       title: "Fewer Status Meetings",
       description: "Data-ready decks replace repetitive update calls. Every stakeholder has the answer before the question.",
     },
     {
-      icon: "⚡",
+      icon: "",
       title: "Faster Decisions",
       description: "Cut time-to-insight from days to seconds. React to market shifts while competitors are still pulling spreadsheets.",
     },
     {
-      icon: "🔁",
+      icon: "",
       title: "Consistent Reporting",
       description: "One metrics layer across all teams means finance, product, and ops are always speaking the same language.",
     },
@@ -391,7 +391,7 @@ export default function DataVisualizationPage() {
                 className="absolute -bottom-5 left-4 sm:-left-8 rounded-2xl px-4 sm:px-5 py-3 sm:py-3.5 shadow-xl flex items-center gap-3"
                 style={{ background: "#fff", animation: "float 3s ease-in-out infinite" }}
               >
-                <span className="text-xl">📊</span>
+                <span className="text-xl"></span>
                 <div>
                   <p className="text-xs" style={{ color: "#6571ab" }}>Avg. setup time</p>
                   <p className="font-bold text-sm sm:text-base" style={{ color: "#07187b" }}>Under 2 Weeks</p>
@@ -475,7 +475,7 @@ export default function DataVisualizationPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {benefits.map((b, i) => (
-                <BenefitCard key={i} icon={b.icon} title={b.title} description={b.description} index={i} />
+                <BenefitCard key={i} title={b.title} description={b.description} index={i} />
               ))}
             </div>
           </div>
@@ -496,10 +496,10 @@ export default function DataVisualizationPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 relative">
               {[
-                { icon: "🔍", title: "Audit",     desc: "We map every data source — databases, APIs, spreadsheets — and identify the metrics that actually matter." },
-                { icon: "🏗️", title: "Model",     desc: "We build a clean SQL layer with documented, version-controlled metrics all teams can trust." },
-                { icon: "🎨", title: "Visualise", desc: "We design intuitive dashboards with drill-downs, filters, and scheduled email exports." },
-                { icon: "🚀", title: "Hand Over",  desc: "Full walkthrough, access provisioned to your team, automation live — we stay on for 30 days post-launch." },
+                { icon: "", title: "Audit",     desc: "We map every data source — databases, APIs, spreadsheets — and identify the metrics that actually matter." },
+                { icon: "", title: "Model",     desc: "We build a clean SQL layer with documented, version-controlled metrics all teams can trust." },
+                { icon: "", title: "Visualise", desc: "We design intuitive dashboards with drill-downs, filters, and scheduled email exports." },
+                { icon: "", title: "Hand Over",  desc: "Full walkthrough, access provisioned to your team, automation live — we stay on for 30 days post-launch." },
               ].map((step, i) => {
                 const { ref, isVisible } = useInView(0.2);
                 return (
@@ -527,7 +527,7 @@ export default function DataVisualizationPage() {
                       className="w-12 h-12 rounded-full flex items-center justify-center text-xl mb-5 shadow-lg relative z-10"
                       style={{ background: "linear-gradient(135deg,#07187b,#94b500)" }}
                     >
-                      {step.icon}
+                      {/* {step.icon} */}
                     </div>
                     <div
                       className="rounded-2xl p-6"

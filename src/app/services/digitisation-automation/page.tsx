@@ -57,8 +57,8 @@ function DeliverableItem({ text, sub, index }: { text: string; sub: string; inde
   );
 }
 
-function BenefitCard({ icon, title, description, index }: {
-  icon: string; title: string; description: string; index: number;
+function BenefitCard({ title, description, index }: {
+  title: string; description: string; index: number;
 }) {
   const { ref, isVisible } = useInView(0.15);
   return (
@@ -93,12 +93,12 @@ function BenefitCard({ icon, title, description, index }: {
       onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.transform = "scaleY(0)")}
     />
     <div className="relative z-10">
-      <div
+      {/* <div
        className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl mb-5"
        style={{ background: "rgba(148,181,0,0.12)" }}
       >
        {icon}
-      </div>
+      </div> */}
       <h3 className="text-lg font-bold mb-2" style={{ color: "#07187b" }}>{title}</h3>
       <p className="text-sm leading-relaxed" style={{ color: "#6571ab" }}>{description}</p>
     </div>
@@ -399,8 +399,8 @@ function ProcessStep({ step, icon, title, desc, index, total }: {
   );
 }
 
-function UseCaseCard({ icon, title, desc, index }: {
-  icon: string; title: string; desc: string; index: number;
+function UseCaseCard({ title, desc, index }: {
+  title: string; desc: string; index: number;
 }) {
   const { ref, isVisible } = useInView(0.15);
   return (
@@ -424,12 +424,12 @@ function UseCaseCard({ icon, title, desc, index }: {
       }}
     />
     <div className="relative z-10">
-      <div
+      {/* <div
        className="w-11 h-11 rounded-2xl flex items-center justify-center text-xl mb-4"
        style={{ background: "rgba(148,181,0,0.12)" }}
       >
        {icon}
-      </div>
+      </div> */}
       <div className="w-6 h-[3px] mb-3 rounded-full" style={{ background: "#94b500" }} />
       <h3 className="text-base font-bold mb-2" style={{ color: "#07187b" }}>{title}</h3>
       <p className="text-sm leading-relaxed" style={{ color: "#6571ab" }}>{desc}</p>
@@ -691,7 +691,7 @@ export default function DigitisationPage() {
        <UseCaseHeader />
        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 mt-12 sm:mt-16">
         {useCases.map((u, i) => (
-          <UseCaseCard key={i} icon={u.icon} title={u.title} desc={u.desc} index={i} />
+          <UseCaseCard key={i} title={u.title} desc={u.desc} index={i} />
         ))}
        </div>
       </div>
@@ -745,7 +745,7 @@ export default function DigitisationPage() {
        <BenefitsHeader />
        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 mt-12 sm:mt-16">
         {benefits.map((b, i) => (
-          <BenefitCard key={i} icon={b.icon} title={b.title} description={b.description} index={i} />
+          <BenefitCard key={i} title={b.title} description={b.description} index={i} />
         ))}
        </div>
       </div>

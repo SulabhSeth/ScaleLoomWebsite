@@ -269,7 +269,7 @@ export default function AboutPage() {
                 className="absolute -bottom-6 left-4 sm:-left-8 rounded-2xl px-5 sm:px-6 py-3 sm:py-4 shadow-xl flex items-center gap-3"
                 style={{ background: "#07187b", color: "#fff", animation: "float 3s ease-in-out infinite" }}
               >
-                <span className="text-xl sm:text-2xl">🚀</span>
+                <span className="text-xl sm:text-2xl"></span>
                 <div>
                   <p className="text-xs opacity-70">Avg. delivery time</p>
                   <p className="font-bold text-base sm:text-lg" style={{ color: "#94b500" }}>2–4 Weeks</p>
@@ -371,12 +371,12 @@ export default function AboutPage() {
                       onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.transform = "scaleY(0)")}
                     />
                     <div className="relative z-10">
-                      <div
+                      {/* <div
                         className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl mb-5"
                         style={{ background: "rgba(148,181,0,0.12)" }}
                       >
                         {r.icon}
-                      </div>
+                      </div> */}
                       <h3 className="text-xl font-bold mb-3" style={{ color: "#07187b" }}>{r.title}</h3>
                       <p className="text-sm leading-relaxed" style={{ color: "#6571ab" }}>{r.desc}</p>
                     </div>
