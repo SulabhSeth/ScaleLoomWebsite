@@ -345,15 +345,49 @@ function Hero() {
 
       <div className="max-w-7xl mx-auto px-6 sm:px-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center relative z-10 pt-24 pb-16">
         <div style={{ opacity:visible?1:0,transform:visible?"translateX(0)":"translateX(-40px)",transition:"opacity 0.9s ease 0.1s,transform 0.9s ease 0.1s" }}>
+          {/* Gradient border frame — unchanged */}
           <div className="relative rounded-4xl p-1" style={{ background:"linear-gradient(135deg,#94b500 0%,#07187b 50%,#94b500 100%)" }}>
             <div className="relative bg-white rounded-[22px] overflow-hidden" style={{ height:360 }}>
+              {/* Shimmer strip at top */}
               <div className="absolute top-0 left-0 right-0 h-2 pointer-events-none" style={{ background:"linear-gradient(90deg,transparent,#94b500,transparent)",animation:"shimmer 3s ease-in-out infinite" }} />
+
+              {/* ── GIF LOGO (replaces /logo.jpg) ── */}
               <div className="flex items-center justify-center h-full">
                 <div className="relative">
-                  <div className="absolute inset-0 rounded-full" style={{ background:"radial-gradient(circle,rgba(148,181,0,0.15) 0%,transparent 70%)",transform:"scale(2.2)" }} />
-                  <Image src="/logo.jpg" alt="ScaleLoom Logo" width={200} height={200} className="object-contain relative z-10 sm:w-[260px] sm:h-[260px]" style={{ borderRadius:24 }} />
+                  {/*
+                    Subtle radial glow behind the GIF so it sits on the white card
+                    without looking pasted-on. The GIF already has a white BG,
+                    so we keep mix-blend-mode normal and let the existing card
+                    bg do the work.
+                  */}
+                  <div
+                    className="absolute inset-0 rounded-full pointer-events-none"
+                    style={{
+                      background:"radial-gradient(circle,rgba(7,24,123,0.07) 0%,transparent 70%)",
+                      transform:"scale(2.4)",
+                    }}
+                  />
+
+                  {/* The animated GIF — drop-in replacement for <Image src="/logo.jpg" …> */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/scaleloomLogo.gif"
+                    alt="ScaleLoom — Innovate. Integrate. Elevate."
+                    width={280}
+                    height={280}
+                    className="relative z-10 object-contain"
+                    style={{
+                      borderRadius: 16,
+                      /*
+                        The GIF background is white (#fff), which matches the card bg perfectly.
+                        No extra blending needed; it sits flush and clean.
+                      */
+                    }}
+                  />
                 </div>
               </div>
+
+              {/* Floating badge — unchanged */}
               <div className="absolute bottom-5 right-5 rounded-xl px-3 py-2 text-center" style={{ background:"rgba(148,181,0,0.12)",border:"1px solid rgba(148,181,0,0.3)",animation:"float 3s ease-in-out infinite 1s" }}>
                 <p className="text-xl font-black" style={{ color:"#94b500" }}>150+</p>
                 <p className="text-[10px] font-bold" style={{ color:"#6571ab" }}>Projects</p>
@@ -536,87 +570,23 @@ function WhyUsSection() {
 
   return (
     <section className="py-16 sm:py-28 relative overflow-hidden bg-white">
-
-      {/* ─── HERO BACKGROUND (IDENTICAL) ─── */}
-
-      {/* green glow */}
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          top: "-20%",
-          left: "-10%",
-          width: 700,
-          height: 700,
-          borderRadius: "50%",
-          background:
-            "radial-gradient(circle,rgba(148,181,0,0.18) 0%,transparent 65%)",
-          transform: `translate(${mousePos.x * -18}px, ${mousePos.y * -14}px)`,
-          transition: "transform 0.6s ease",
-        }}
-      />
-
-      {/* blue glow */}
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          bottom: "-15%",
-          right: "-5%",
-          width: 500,
-          height: 500,
-          borderRadius: "50%",
-          background:
-            "radial-gradient(circle,rgba(7,24,123,0.08) 0%,transparent 65%)",
-          transform: `translate(${mousePos.x * 14}px, ${mousePos.y * 12}px)`,
-          transition: "transform 0.6s ease",
-        }}
-      />
-
-      {/* dot grid */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.035]"
-        style={{
-          backgroundImage:
-            "radial-gradient(#07187b 1px,transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
-
-      {/* left gradient line */}
-      <div
-        className="absolute left-0 top-0 h-full w-1.5 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to bottom,#94b500,#07187b,transparent)",
-        }}
-      />
-
-      {/* ─── ORIGINAL CONTENT (UNCHANGED) ─── */}
+      <div className="absolute pointer-events-none" style={{ top:"-20%",left:"-10%",width:700,height:700,borderRadius:"50%",background:"radial-gradient(circle,rgba(148,181,0,0.18) 0%,transparent 65%)",transform:`translate(${mousePos.x*-18}px,${mousePos.y*-14}px)`,transition:"transform 0.6s ease" }} />
+      <div className="absolute pointer-events-none" style={{ bottom:"-15%",right:"-5%",width:500,height:500,borderRadius:"50%",background:"radial-gradient(circle,rgba(7,24,123,0.08) 0%,transparent 65%)",transform:`translate(${mousePos.x*14}px,${mousePos.y*12}px)`,transition:"transform 0.6s ease" }} />
+      <div className="absolute inset-0 pointer-events-none opacity-[0.035]" style={{ backgroundImage:"radial-gradient(#07187b 1px,transparent 1px)",backgroundSize:"32px 32px" }} />
+      <div className="absolute left-0 top-0 h-full w-1.5 pointer-events-none" style={{ background:"linear-gradient(to bottom,#94b500,#07187b,transparent)" }} />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-10 relative z-10">
-        <div
-          className="rounded-3xl mb-12 sm:mb-20 py-8 sm:py-10 px-4 sm:px-6 grid grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4"
-          style={{
-            background: "linear-gradient(90deg,#07187b 0%,#0d2299 100%)",
-          }}
-        >
+        <div className="rounded-3xl mb-12 sm:mb-20 py-8 sm:py-10 px-4 sm:px-6 grid grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-4" style={{ background:"linear-gradient(90deg,#07187b 0%,#0d2299 100%)" }}>
           {[
             { value: 150, suffix: "+", label: "Projects Shipped" },
             { value: 42, suffix: "", label: "Enterprise Integrations" },
             { value: 60, suffix: "%", label: "Avg. Cost Reduction" },
           ].map((s, i) => (
             <div key={i} className="text-center px-2 sm:px-4">
-              <p
-                className="text-4xl sm:text-5xl font-black mb-1"
-                style={{ color: "#94b500" }}
-              >
+              <p className="text-4xl sm:text-5xl font-black mb-1" style={{ color:"#94b500" }}>
                 <Counter value={s.value} suffix={s.suffix} />
               </p>
-              <p
-                className="text-xs sm:text-sm font-medium tracking-wide"
-                style={{ color: "rgba(255,255,255,0.6)" }}
-              >
-                {s.label}
-              </p>
+              <p className="text-xs sm:text-sm font-medium tracking-wide" style={{ color:"rgba(255,255,255,0.6)" }}>{s.label}</p>
             </div>
           ))}
         </div>
