@@ -344,54 +344,59 @@ function Hero() {
       <div className="absolute left-0 top-0 h-full w-1.5 pointer-events-none" style={{ background:"linear-gradient(to bottom,#94b500,#07187b,transparent)" }} />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center relative z-10 pt-24 pb-16">
-        <div style={{ opacity:visible?1:0,transform:visible?"translateX(0)":"translateX(-40px)",transition:"opacity 0.9s ease 0.1s,transform 0.9s ease 0.1s" }}>
-          {/* Gradient border frame — unchanged */}
-          <div className="relative rounded-4xl p-1" style={{ background:"linear-gradient(135deg,#94b500 0%,#07187b 50%,#94b500 100%)" }}>
-            <div className="relative bg-white rounded-[22px] overflow-hidden" style={{ height:360 }}>
-              {/* Shimmer strip at top */}
-              <div className="absolute top-0 left-0 right-0 h-2 pointer-events-none" style={{ background:"linear-gradient(90deg,transparent,#94b500,transparent)",animation:"shimmer 3s ease-in-out infinite" }} />
+        <div className="flex justify-center lg:justify-start" style={{ opacity:visible?1:0,transform:visible?"translateX(0)":"translateX(-40px)",transition:"opacity 0.9s ease 0.1s,transform 0.9s ease 0.1s" }}>
+          {/* Full-Bleed Logo Showcase with Halo Effect */}
+          <div className="relative w-full max-w-md flex items-center justify-center">
+            {/* Triple-layer glow halo effect */}
+            <div
+              className="absolute rounded-full pointer-events-none"
+              style={{
+                width: 520,
+                height: 520,
+                background: "radial-gradient(circle,rgba(148,181,0,0.25) 0%,rgba(148,181,0,0.12) 30%,transparent 70%)",
+                animation: "pulse 4s ease-in-out infinite",
+              }}
+            />
+            <div
+              className="absolute rounded-full pointer-events-none"
+              style={{
+                width: 420,
+                height: 420,
+                background: "radial-gradient(circle,rgba(7,24,123,0.15) 0%,transparent 60%)",
+                animation: "pulse 5s ease-in-out infinite 0.5s",
+              }}
+            />
 
-              {/* ── GIF LOGO (replaces /logo.jpg) ── */}
-              <div className="flex items-center justify-center h-full">
-                <div className="relative">
-                  {/*
-                    Subtle radial glow behind the GIF so it sits on the white card
-                    without looking pasted-on. The GIF already has a white BG,
-                    so we keep mix-blend-mode normal and let the existing card
-                    bg do the work.
-                  */}
-                  <div
-                    className="absolute inset-0 rounded-full pointer-events-none"
-                    style={{
-                      background:"radial-gradient(circle,rgba(7,24,123,0.07) 0%,transparent 70%)",
-                      transform:"scale(2.4)",
-                    }}
-                  />
+            {/* Main logo container with enhanced glow */}
+            <div className="relative">
+              <div
+                className="absolute inset-0 rounded-full pointer-events-none"
+                style={{
+                  background: "radial-gradient(circle,rgba(148,181,0,0.3) 0%,rgba(7,24,123,0.1) 40%,transparent 75%)",
+                  transform: "scale(2.6)",
+                  filter: "blur(8px)",
+                }}
+              />
 
-                  {/* The animated GIF — drop-in replacement for <Image src="/logo.jpg" …> */}
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/scaleloomLogo.gif"
-                    alt="ScaleLoom — Innovate. Integrate. Elevate."
-                    width={280}
-                    height={280}
-                    className="relative z-10 object-contain"
-                    style={{
-                      borderRadius: 16,
-                      /*
-                        The GIF background is white (#fff), which matches the card bg perfectly.
-                        No extra blending needed; it sits flush and clean.
-                      */
-                    }}
-                  />
-                </div>
-              </div>
+              {/* The animated GIF — full-bleed showcase */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/scaleloomLogo.gif"
+                alt="ScaleLoom — Innovate. Integrate. Elevate."
+                width={450}
+                height={450}
+                className="relative z-10 object-contain drop-shadow-2xl"
+                style={{
+                  borderRadius: 0,
+                  filter: "drop-shadow(0 20px 60px rgba(7,24,123,0.25)) drop-shadow(0 0 80px rgba(148,181,0,0.15))",
+                }}
+              />
+            </div>
 
-              {/* Floating badge — unchanged */}
-              <div className="absolute bottom-5 right-5 rounded-xl px-3 py-2 text-center" style={{ background:"rgba(148,181,0,0.12)",border:"1px solid rgba(148,181,0,0.3)",animation:"float 3s ease-in-out infinite 1s" }}>
-                <p className="text-xl font-black" style={{ color:"#94b500" }}>150+</p>
-                <p className="text-[10px] font-bold" style={{ color:"#6571ab" }}>Projects</p>
-              </div>
+            {/* Floating badge — repositioned */}
+            <div className="absolute bottom-0 right-0 rounded-xl px-3 py-2 text-center" style={{ background:"rgba(148,181,0,0.12)",border:"1px solid rgba(148,181,0,0.3)",animation:"float 3s ease-in-out infinite 1s" }}>
+              <p className="text-xl font-black" style={{ color:"#94b500" }}>150+</p>
+              <p className="text-[10px] font-bold" style={{ color:"#6571ab" }}>Projects</p>
             </div>
           </div>
         </div>
@@ -426,6 +431,8 @@ function Hero() {
     </section>
   );
 }
+
+
 
 /* ═══════════════════════════════════════════════════════════
    VISION
