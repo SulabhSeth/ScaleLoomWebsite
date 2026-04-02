@@ -345,59 +345,35 @@ function Hero() {
 
       <div className="max-w-7xl mx-auto px-6 sm:px-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center relative z-10 pt-24 pb-16">
         <div className="flex justify-center lg:justify-start" style={{ opacity:visible?1:0,transform:visible?"translateX(0)":"translateX(-40px)",transition:"opacity 0.9s ease 0.1s,transform 0.9s ease 0.1s" }}>
-          {/* Full-Bleed Logo Showcase with Halo Effect */}
+          {/* Logo Showcase with Subtle Blending */}
           <div className="relative w-full max-w-md flex items-center justify-center">
-            {/* Triple-layer glow halo effect */}
-            <div
-              className="absolute rounded-full pointer-events-none"
+            {/* Soft green glow effect */}
+            <div className="absolute w-80 h-80 bg-brandGreen/40 blur-3xl rounded-full pointer-events-none"></div>
+
+            {/* Shadow behind logo */}
+            <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-xl pointer-events-none"></div>
+
+            {/* The animated GIF */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/scaleloomLogo.gif"
+              alt="ScaleLoom — Innovate. Integrate. Elevate."
+              width={420}
+              height={420}
+              className="relative z-10 object-contain"
               style={{
-                width: 520,
-                height: 520,
-                background: "radial-gradient(circle,rgba(148,181,0,0.25) 0%,rgba(148,181,0,0.12) 30%,transparent 70%)",
-                animation: "pulse 4s ease-in-out infinite",
+                borderRadius: 0,
               }}
             />
-            <div
-              className="absolute rounded-full pointer-events-none"
-              style={{
-                width: 420,
-                height: 420,
-                background: "radial-gradient(circle,rgba(7,24,123,0.15) 0%,transparent 60%)",
-                animation: "pulse 5s ease-in-out infinite 0.5s",
-              }}
-            />
 
-            {/* Main logo container with enhanced glow */}
-            <div className="relative">
-              <div
-                className="absolute inset-0 rounded-full pointer-events-none"
-                style={{
-                  background: "radial-gradient(circle,rgba(148,181,0,0.3) 0%,rgba(7,24,123,0.1) 40%,transparent 75%)",
-                  transform: "scale(2.6)",
-                  filter: "blur(8px)",
-                }}
-              />
+            {/* White decorative ring */}
+            <div className="absolute top-12 right-12 w-12 h-12 border-4 border-white/70 rounded-full pointer-events-none"></div>
 
-              {/* The animated GIF — full-bleed showcase */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/scaleloomLogo.gif"
-                alt="ScaleLoom — Innovate. Integrate. Elevate."
-                width={450}
-                height={450}
-                className="relative z-10 object-contain drop-shadow-2xl"
-                style={{
-                  borderRadius: 0,
-                  filter: "drop-shadow(0 20px 60px rgba(7,24,123,0.25)) drop-shadow(0 0 80px rgba(148,181,0,0.15))",
-                }}
-              />
-            </div>
-
-            {/* Floating badge — repositioned */}
-            <div className="absolute bottom-0 right-0 rounded-xl px-3 py-2 text-center" style={{ background:"rgba(148,181,0,0.12)",border:"1px solid rgba(148,181,0,0.3)",animation:"float 3s ease-in-out infinite 1s" }}>
+            {/* Floating badge */}
+            {/* <div className="absolute bottom-0 right-0 rounded-xl px-3 py-2 text-center" style={{ background:"rgba(148,181,0,0.12)",border:"1px solid rgba(148,181,0,0.3)",animation:"float 3s ease-in-out infinite 1s" }}>
               <p className="text-xl font-black" style={{ color:"#94b500" }}>150+</p>
               <p className="text-[10px] font-bold" style={{ color:"#6571ab" }}>Projects</p>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -431,6 +407,8 @@ function Hero() {
     </section>
   );
 }
+
+
 
 
 

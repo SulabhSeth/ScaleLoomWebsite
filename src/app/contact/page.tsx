@@ -37,7 +37,7 @@ export default function ContactPage() {
                   ✉️
                 </div>
                 <p className="text-brandBlue font-medium text-sm md:text-base">
-                  scaleloomservices@gmail.com
+                  contact@scaleloomservices.com
                 </p>
               </div>
 
@@ -47,7 +47,7 @@ export default function ContactPage() {
                   📞
                 </div>
                 <p className="text-brandBlue font-medium text-sm md:text-base">
-                  +91-9999630334 / +91-9873076300
+                  +91-9999630334 / +91-9873310479
                 </p>
               </div>
             </div>
@@ -62,7 +62,7 @@ export default function ContactPage() {
 
             <div className="relative h-[300px] md:h-[500px] w-full rounded-3xl overflow-hidden shadow-xl">
               <Image
-                src="/logo3.png"
+                src="/scaleloomLogo.gif"
                 alt="Contact"
                 fill
                 className="object-cover"

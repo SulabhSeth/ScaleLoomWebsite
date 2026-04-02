@@ -231,7 +231,7 @@ export default function DataVisualizationPage() {
             <div>
               {/* breadcrumb */}
               <p
-                className="text-xs font-bold tracking-[0.3em] uppercase mb-6 flex items-center gap-2"
+                className=" font-bold tracking-[0.3em] uppercase mb-6 flex items-center gap-2"
                 style={{
                   color: "#94b500",
                   opacity: heroVisible ? 1 : 0,
@@ -239,7 +239,7 @@ export default function DataVisualizationPage() {
                   transition: "opacity 0.6s ease, transform 0.6s ease",
                 }}
               >
-                <Link href="/services" className="hover:underline" style={{ color: "#6571ab" }}>Our Services</Link>
+                <Link href="" className="hover:underline" style={{ color: "#6571ab" }}>Our Services</Link>
                 <span style={{ color: "#6571ab" }}>›</span>
                 Data Visualization
               </p>

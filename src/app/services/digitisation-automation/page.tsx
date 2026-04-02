@@ -574,7 +574,7 @@ export default function DigitisationPage() {
        {/* LEFT */}
        <div>
         <p
-          className="text-xs font-bold tracking-[0.3em] uppercase mb-6 flex items-center gap-2 flex-wrap"
+          className="font-bold tracking-[0.3em] uppercase mb-6 flex items-center gap-2 flex-wrap"
           style={{
            color: "#94b500",
            opacity: heroVisible ? 1 : 0,
