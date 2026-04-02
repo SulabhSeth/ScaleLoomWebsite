@@ -398,12 +398,12 @@ function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" style={{ opacity:visible?1:0,transition:"opacity 1s ease 1.2s" }}>
+      {/* <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" style={{ opacity:visible?1:0,transition:"opacity 1s ease 1.2s" }}>
         <span className="text-xs font-bold tracking-widest uppercase" style={{ color:"#6571ab",opacity:0.5 }}>Scroll</span>
         <div className="w-5 h-8 rounded-full border-2 flex items-start justify-center pt-1.5" style={{ borderColor:"rgba(7,24,123,0.2)" }}>
           <div className="w-1 h-2 rounded-full" style={{ background:"#94b500",animation:"scrollDot 1.6s ease-in-out infinite" }} />
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }
