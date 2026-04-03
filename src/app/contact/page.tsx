@@ -60,12 +60,12 @@ export default function ContactPage() {
           {/* RIGHT IMAGE */}
           <div className="relative">
 
-            <div className="relative h-[300px] md:h-[500px] w-full rounded-3xl overflow-hidden shadow-xl">
+            <div className="relative w-full aspect-square md:aspect-auto md:h-[500px] rounded-3xl overflow-hidden shadow-xl flex items-center justify-center bg-white/50">
               <Image
                 src="/scaleloomLogo.gif"
                 alt="Contact"
                 fill
-                className="object-cover"
+                className="object-contain p-4"
               />
             </div>
 

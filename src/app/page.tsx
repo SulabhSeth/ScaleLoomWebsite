@@ -344,39 +344,35 @@ function Hero() {
       <div className="absolute left-0 top-0 h-full w-1.5 pointer-events-none" style={{ background:"linear-gradient(to bottom,#94b500,#07187b,transparent)" }} />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center relative z-10 pt-24 pb-16">
-        <div className="flex justify-center lg:justify-start" style={{ opacity:visible?1:0,transform:visible?"translateX(0)":"translateX(-40px)",transition:"opacity 0.9s ease 0.1s,transform 0.9s ease 0.1s" }}>
-          {/* Logo Showcase with Subtle Blending */}
-          <div className="relative w-full max-w-md flex items-center justify-center">
-            {/* Soft green glow effect */}
-            <div className="absolute w-80 h-80 bg-brandGreen/40 blur-3xl rounded-full pointer-events-none"></div>
 
-            {/* Shadow behind logo */}
-            <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-xl pointer-events-none"></div>
+        {/* ── LEFT: Logo ── */}
+        {/* ── LEFT: Logo ── */}
+<div className="flex justify-center lg:justify-start" style={{ opacity:visible?1:0,transform:visible?"translateX(0)":"translateX(-40px)",transition:"opacity 0.9s ease 0.1s,transform 0.9s ease 0.1s" }}>
+  <div className="relative w-full max-w-md">
 
-            {/* The animated GIF */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/scaleloomLogo.gif"
-              alt="ScaleLoom — Innovate. Integrate. Elevate."
-              width={420}
-              height={420}
-              className="relative z-10 object-contain"
-              style={{
-                borderRadius: 0,
-              }}
-            />
+    {/* Green glow — sits outside the image container */}
+    <div className="absolute -top-10 -right-10 w-60 h-60 rounded-full pointer-events-none" style={{ background:"rgba(148,181,0,0.35)", filter:"blur(60px)" }} />
 
-            {/* White decorative ring */}
-            <div className="absolute top-12 right-12 w-12 h-12 border-4 border-white/70 rounded-full pointer-events-none"></div>
+    {/* Image container — bg matches page so logo bleeds in naturally */}
+    <div className="relative w-full aspect-square rounded-3xl overflow-hidden flex items-center justify-center" style={{ background:"rgba(255,255,255,0.5)" }}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/scaleloomLogo.gif"
+        alt="ScaleLoom — Innovate. Integrate. Elevate."
+        width={420}
+        height={420}
+        className="object-contain p-4"
+        style={{ borderRadius: 0 }}
+      />
+    </div>
 
-            {/* Floating badge */}
-            {/* <div className="absolute bottom-0 right-0 rounded-xl px-3 py-2 text-center" style={{ background:"rgba(148,181,0,0.12)",border:"1px solid rgba(148,181,0,0.3)",animation:"float 3s ease-in-out infinite 1s" }}>
-              <p className="text-xl font-black" style={{ color:"#94b500" }}>150+</p>
-              <p className="text-[10px] font-bold" style={{ color:"#6571ab" }}>Projects</p>
-            </div> */}
-          </div>
-        </div>
+    {/* White decorative ring */}
+    <div className="absolute top-12 right-10 w-12 h-12 border-4 border-white/70 rounded-full pointer-events-none" />
 
+  </div>
+</div>
+
+        {/* ── RIGHT: Text ── */}
         <div className="mt-4 lg:mt-0">
           <p className="text-xs font-bold tracking-[0.35em] uppercase mb-6" style={{ color:"#94b500",opacity:visible?1:0,transform:visible?"none":"translateY(16px)",transition:"opacity 0.6s ease 0.2s,transform 0.6s ease 0.2s" }}>Digital Engineering Studio</p>
           <h1 className="font-black leading-[1.02] mb-6" style={{ fontSize:"clamp(2.4rem,5vw,4.5rem)",color:"#07187b",opacity:visible?1:0,transform:visible?"none":"translateY(28px)",transition:"opacity 0.7s ease 0.3s,transform 0.7s ease 0.3s" }}>
@@ -396,14 +392,8 @@ function Hero() {
             ))}
           </div>
         </div>
-      </div>
 
-      {/* <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" style={{ opacity:visible?1:0,transition:"opacity 1s ease 1.2s" }}>
-        <span className="text-xs font-bold tracking-widest uppercase" style={{ color:"#6571ab",opacity:0.5 }}>Scroll</span>
-        <div className="w-5 h-8 rounded-full border-2 flex items-start justify-center pt-1.5" style={{ borderColor:"rgba(7,24,123,0.2)" }}>
-          <div className="w-1 h-2 rounded-full" style={{ background:"#94b500",animation:"scrollDot 1.6s ease-in-out infinite" }} />
-        </div>
-      </div> */}
+      </div>
     </section>
   );
 }
@@ -527,7 +517,7 @@ function ServiceCard({ title, sub, path, accent, index, mockup }: {
 
       <div className="relative z-10 px-5 py-4">
         <div className="w-8 h-[3px] mb-3 rounded-full" style={{ background:accent }} />
-        <h3 className="text-sm font-bold mb-1.5 leading-snug" style={{ color:"#07187b" }}>{title}</h3>
+        <h3 className="text-lg font-bold mb-1.5 leading-snug" style={{ color:"#07187b" }}>{title}</h3>
         <p className="text-xs leading-relaxed" style={{ color:"#6571ab" }}>{sub}</p>
         <p className="text-xs font-bold mt-3 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all duration-300" style={{ color:accent }}>
           Learn more <span>→</span>
